@@ -1,4 +1,0 @@
-# A list of the commands used in building this project.
-
-rails new rails-auth0 -T --database=postgresql
-

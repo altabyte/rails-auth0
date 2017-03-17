@@ -1,0 +1,31 @@
+# See a list of the default styles at:
+#
+#  https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+
+inherit_from: .rubocop_todo.yml
+
+# Include: **/Gemfile, **/gems.rb
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+
+# Extend the maximum line length to 120 characters.
+Metrics/LineLength:
+  Max: 120
+
+Style/ExtraSpacing:
+  AllowForAlignment: true
+
+# Allow { :this } and [ :this ]
+Style/SpaceInsideBrackets:
+  Enabled: false
+
+Style/ExtraSpacing:
+  Enabled: false
+
+# Allow more than one blank line
+Style/EmptyLines:
+  Enabled: false
+
+Style/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines_except_namespace

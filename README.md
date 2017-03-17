@@ -35,7 +35,7 @@ For local testing and development copy [.env.example](.env.example) into the fol
 Your secret key is used for verifying the integrity of signed cookies.
 If you change this key, all old signed cookies will become invalid!
 
-Use the following command to generate a new sectret key:
+Use the following command to generate a new secret key:
 
 ```shell 
 ./bin/rails secret 

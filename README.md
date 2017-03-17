@@ -20,9 +20,9 @@ gem install bundler
 
 ## <a name="env-vars"></a>Environmental variables
 
-Details of the environmental variables used in this app. Examples can be seen in [.env.examples](config/.env.example)
+Details of the environmental variables used in this app. Examples can be seen in [.env.example](.env.example)
 
-For local testing and development copy [.env.examples](config/.env.example) into the following files:
+For local testing and development copy [.env.example](.env.example) into the following files:
 
 * .env.development
 * .env.test

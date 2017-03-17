@@ -20,9 +20,9 @@ gem install bundler
 
 ## <a name="env-vars"></a>Environmental variables
 
-Details of the environmental variables used in this app. Examples can be seen in [.env.examples](tree/master/config/.env.example)
+Details of the environmental variables used in this app. Examples can be seen in [.env.examples](config/.env.example)
 
-For local testing and development copy [.env.examples](tree/master/config/.env.example) into the following files:
+For local testing and development copy [.env.examples](config/.env.example) into the following files:
 
 * .env.development
 * .env.test
@@ -44,7 +44,7 @@ Use the following command to generate a new sectret key:
 ### DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_URL
 
 You can optionally choose to specify database config values as environmental variables
-and these will over-ride those in [config/database.yml](tree/master/config/database.yml). 
+and these will over-ride those in [config/database.yml](config/database.yml). 
 
 
 ---

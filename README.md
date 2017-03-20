@@ -44,8 +44,15 @@ Use the following command to generate a new secret key:
 ### DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_URL
 
 You can optionally choose to specify database config values as environmental variables
-and these will over-ride those in [config/database.yml](config/database.yml). 
+and these will over-ride those in [config/database.yml](config/database.yml).
 
+
+### AUTH0_DOMAIN
+### AUTH0_CLIENT_ID
+### AUTH0_CLIENT_SECRET
+### AUTH0_CALLBACK_URL
+
+Auth0 credentials.
 
 ---
 

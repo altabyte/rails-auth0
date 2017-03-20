@@ -13,6 +13,14 @@ Bundler/OrderedGems:
   Exclude:
     - 'Gemfile'
 
+Documentation:
+  Exclude:
+    - app/models/application_record.rb
+    - app/helpers/*
+    - app/mailers/*
+    - spec/**
+    - spec/**/**
+
 Metrics/BlockLength:
   ExcludedMethods:
     - configure

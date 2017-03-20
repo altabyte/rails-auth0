@@ -17,6 +17,7 @@
 
 $(document).on('turbolinks:load', function () {
     publicPagesReady.call();
+    dashboardReady.call();
 
 
     if ($("#flash").length) {

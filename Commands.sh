@@ -18,3 +18,4 @@ rubocop --auto-gen-config
 ./bin/bundle binstubs rspec-core
 
 ./bin/rails g controller PublicPages home
+./bin/rails g controller Dashboard index

@@ -19,3 +19,5 @@ rubocop --auto-gen-config
 
 ./bin/rails g controller PublicPages home
 ./bin/rails g controller Dashboard index
+
+./bin/rails g controller auth0 callback failure --skip-template-engine --skip-assets

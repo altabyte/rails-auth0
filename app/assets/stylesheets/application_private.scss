@@ -1,0 +1,103 @@
+body.app {
+
+  h1 {
+    margin-bottom: 12px;
+  }
+
+  a {
+    color: $color-white;
+  }
+
+  a, svg {
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+  }
+
+  #application-background {
+    $color-bg-gradient-1: lighten($color-background-blue, 2%);
+    $color-bg-gradient-2: darken($color-background-blue, 15%);
+
+    z-index: -1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-background-blue;
+    background: -webkit-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+    background: -o-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+    background: -moz-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+    background: radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+  }
+
+  color: $color-white;
+
+  header {
+    border-bottom: 1px solid darken($color-background-blue, 6%);
+    margin-bottom: 18px;
+    width: 100%;
+
+    div.container {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+
+      @media (min-width: 500px) {
+        width: 500px;
+      }
+
+      @media (min-width: 768px) {
+        width: 768px;
+      }
+
+      @media (min-width: 1024px) {
+        width: 1024px;
+      }
+
+      div.toolbar {
+        position: absolute;
+        top: 16px;
+        right: 0;
+        font-size: 1.25em;
+
+        color: $color-white;
+
+        a {
+          color: $color-white;
+        }
+      }
+
+      a.side-bar-button {
+        position: absolute;
+        top: 12px;
+        left: 0;
+        color: $color-white;
+      }
+
+      img.xpand-access-logo, svg.xpand-access-logo {
+        display: inline-block;
+        margin-left: 20px;
+        width: 150px;
+        fill: $color-white;
+      }
+    }
+  }
+
+  div.xpand-access-action {
+    margin: 0 auto;
+    width: 100%;
+
+    @media (min-width: 500px) {
+      width: 500px;
+    }
+
+    @media (min-width: 768px) {
+      width: 768px;
+    }
+
+    @media (min-width: 1024px) {
+      width: 1024px;
+    }
+  }
+
+}

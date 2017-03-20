@@ -16,3 +16,5 @@ rubocop --auto-gen-config
 # Install RSpec
 ./bin/rails g rspec:install
 ./bin/bundle binstubs rspec-core
+
+./bin/rails g controller PublicPages home

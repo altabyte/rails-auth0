@@ -13,4 +13,26 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require public_pages
+
+$(document).on('turbolinks:load', function () {
+    publicPagesReady.call();
+
+
+    if ($("#flash").length) {
+        $("#flash").fadeIn(1500);
+        setTimeout(function() {
+            $("#flash").fadeOut(1500);
+        }, 3000);
+        $("#flash").click(function() {
+            $("#flash").hide('fast');
+        });
+    }
+
+
+    $('.toggle-next-element').click(function (event) {
+        $(this).next().toggle("slow");
+        $(this).find(".fa.more").toggle();
+        $(this).find(".fa.less").toggle();
+    });
+});

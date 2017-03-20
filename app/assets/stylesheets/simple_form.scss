@@ -1,0 +1,199 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+  -webkit-transition-delay: 9999s;
+}
+
+form.simple_form, form.simple-form {
+
+  $label-color: $color-white;
+  $input-bg-color: $color-white;
+  $input-color: darken($color-background-blue, 20%);
+
+  .input {
+    position: relative;
+  }
+
+  .error {
+    color: $color-form-field-error;
+  }
+
+  div.field_with_errors {
+    input[type=text], input[type=email], input[type=date], textarea, select {
+      /*background-color: $color-form-field-error;*/
+      border: 2px solid $color-form-field-error;
+    }
+
+    label {
+      color: $color-form-field-error;
+    }
+
+    span.error {
+      font-style: italic;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 13pt;
+    color: $label-color;
+    margin: 0;
+    padding: 12px 0 3px 0;
+
+    &.required {
+      font-weight: bold;
+
+      &::after {
+        content: ' *';
+      }
+    }
+
+    &.optional {
+
+    }
+
+    abbr {
+      display: none;
+    }
+  }
+
+  span.error {
+    display: inline-block;
+    padding-left: 18px;
+  }
+
+  span.hint {
+    display: inline-block;
+    padding-left: 18px;
+    font-style: italic;
+    color: $color-white;
+  }
+
+  select {
+    padding: 5px;
+    line-height: 1;
+    height: 34px;
+  }
+
+  input, textarea, button {
+    $placeholder-color: lighten($color-background-blue, 30%);
+    &::-webkit-input-placeholder { color: $placeholder-color !important; }
+    &::-moz-placeholder { color: $placeholder-color !important; }
+    &::-ms-input-placeholder { color: $placeholder-color !important; }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type=text], input[type=number], input[type=email], input[type=password], input[type=date], input[type=tel], textarea, select {
+    margin: 0;
+    padding: 6px 12px;
+    font-weight: normal;
+    font-size: 11pt;
+    color: $input-color;
+    background-color: $input-bg-color;
+    border: 1px solid $input-bg-color;
+    border-radius: 3px;
+  }
+
+  .radio {
+    display: inline-block;
+    margin: 0;
+
+    label {
+      padding: 0 10px 0 0;
+      margin: 0;
+    }
+
+    input[type=radio] {
+      display: none;
+      position: relative;
+      margin-left: 6px;
+
+      ~ i.fa.fa-circle-o       { display: inline; }
+      ~ i.fa.fa-check-circle-o { display: none; }
+
+      &:checked {
+        ~ i.fa.fa-circle-o       { display: none; }
+        ~ i.fa.fa-check-circle-o { display: inline; }
+      }
+    }
+
+    input[type=checkbox] {
+      display: none;
+    }
+  }
+
+  input[type=submit], button {
+    margin-top: 18px;
+    //@include default-button; /* global.scss */
+  }
+
+  .flip-switch {
+    position: relative;
+    height: 30px;
+    text-align: right;
+
+    label.flip-switch-label {
+      position: absolute;
+      top: 0;
+      right: 80px;
+      padding: 1px;
+    }
+
+    .flip-switch-field {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  .flip-switch-field
+  {
+    $flip-switch-color: #1c91b2;
+
+    position: relative;
+    width: 60px;
+    height: 20px;
+    display: inline-block;
+    -webkit-appearance: initial;
+    border-radius: 3px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: none;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid $flip-switch-color;
+    margin-right: 10px;
+
+    &:after {
+      position: absolute;
+      top: 5%;
+      display: block;
+      line-height: 12px;
+      width: 45%;
+      height: 90%;
+      background: $flip-switch-color;
+      box-sizing: border-box;
+      text-align: center;
+      transition: all 0.3s ease-in 0s;
+      color: $color-white;
+      border: $flip-switch-color 1px solid;
+      border-radius: 3px;
+      left: 2%;
+      content: "No";
+    }
+
+    &:checked:after
+    {
+      left: 53%;
+      content: "Yes";
+    }
+  }
+}

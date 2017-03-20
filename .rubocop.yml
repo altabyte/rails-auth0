@@ -4,6 +4,10 @@
 
 inherit_from: .rubocop_todo.yml
 
+AllCops:
+  Include:
+    - rubocop-rspec
+
 # Include: **/Gemfile, **/gems.rb
 Bundler/OrderedGems:
   Exclude:
@@ -27,16 +31,19 @@ Style/BlockComments:
 Style/ExtraSpacing:
   AllowForAlignment: true
 
-# Allow { :this } and [ :this ]
-Style/SpaceInsideBrackets:
-  Enabled: false
-
-Style/ExtraSpacing:
-  Enabled: false
-
 # Allow more than one blank line
 Style/EmptyLines:
   Enabled: false
 
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
 Style/EmptyLinesAroundModuleBody:
   EnforcedStyle: empty_lines_except_namespace
+
+Style/ExtraSpacing:
+  Enabled: false
+
+# Allow { :this } and [ :this ]
+Style/SpaceInsideBrackets:
+  Enabled: false

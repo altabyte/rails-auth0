@@ -16,6 +16,11 @@ gem 'pg', '~> 0.20',                                    platform: :ruby
 gem 'activerecord-jdbcpostgresql-adapter',              platform: :jruby
 gem 'sass-rails',                                       '~> 5.0'
 
+# Authorization
+gem 'auth0'                                             # Auth0 Ruby SDK
+gem 'omniauth',                                         '~> 1.3.2'
+gem 'omniauth-auth0',                                   '~> 1.4.2'
+
 gem 'font-awesome-rails'                                # https://github.com/bokmann/font-awesome-rails
 gem 'inline_svg'                                        # https://github.com/jamesmartin/inline_svg
 

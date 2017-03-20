@@ -9,9 +9,20 @@ Bundler/OrderedGems:
   Exclude:
     - 'Gemfile'
 
+Metrics/BlockLength:
+  ExcludedMethods:
+    - configure
+
 # Extend the maximum line length to 120 characters.
 Metrics/LineLength:
   Max: 120
+
+# Allow block comments to be used.
+# =begin
+#   :commented_out_block
+# =end
+Style/BlockComments:
+  Enabled: false
 
 Style/ExtraSpacing:
   AllowForAlignment: true

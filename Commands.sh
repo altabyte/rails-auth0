@@ -12,3 +12,7 @@ rubocop --auto-gen-config
 # Install PostgreSQL extensions.
 ./bin/rails g migration add_hstore
 ./bin/rails g migration add_uuid
+
+# Install RSpec
+./bin/rails g rspec:install
+./bin/bundle binstubs rspec-core

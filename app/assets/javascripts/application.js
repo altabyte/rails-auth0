@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require open_source/auth0/lock
+//
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks

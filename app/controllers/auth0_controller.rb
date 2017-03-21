@@ -21,6 +21,17 @@ class Auth0Controller < ApplicationController
     puts @error_msg
   end
 
+  # Remember to register the *Allowed Logout URLs* at the following link.
+  #
+  # @see https://manage.auth0.com/#/account/advanced
+  #
+  def logout
+    url = auth0_logout_url.to_s   # auth0_logout_url is defined in app/helpers/auth0_helper.rb
+    return if url.blank?
+    reset_session
+    redirect_to url
+  end
+
   #---------------------------------------------------------------------------
   private
 

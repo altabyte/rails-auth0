@@ -13,9 +13,9 @@ require 'rspec/rails'
 # require 'capybara/rspec'
 require 'database_cleaner'
 require 'factory_girl'
-# require 'auth0_spec_helper'
 require 'rspec/collection_matchers'
 require 'shoulda/matchers'
+require 'support/auth0_support'
 require 'support/devise_support'
 
 module Strategy

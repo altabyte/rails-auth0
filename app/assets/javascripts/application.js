@@ -16,6 +16,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require public_pages
+//= require dashboard
 
 $(document).on('turbolinks:load', function () {
     publicPagesReady.call();

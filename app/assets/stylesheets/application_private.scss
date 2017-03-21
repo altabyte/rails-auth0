@@ -74,7 +74,7 @@ body.app {
         color: $color-white;
       }
 
-      img.xpand-access-logo, svg.xpand-access-logo {
+      img.app-logo, svg.app-logo {
         display: inline-block;
         margin-left: 20px;
         width: 150px;
@@ -83,7 +83,7 @@ body.app {
     }
   }
 
-  div.xpand-access-action {
+  div.app-action {
     margin: 0 auto;
     width: 100%;
 
@@ -99,5 +99,4 @@ body.app {
       width: 1024px;
     }
   }
-
 }

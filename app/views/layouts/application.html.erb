@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RailsAuth0</title>
-    <%= csrf_meta_tags %>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <title>Rails Auth0</title>
+  <%= favicon_link_tag('favicon.ico') if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicon.ico')) %>
+  <%= favicon_link_tag('apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png') if File.exists?(Rails.root.join('app', 'assets', 'images', 'apple-touch-icon.png')) %>
+  <% %w(76 120 152 167 180).each do |size| -%>
+      <% file = "apple-touch-icon-#{size}x#{size}.png" -%>
+      <% next unless File.exists?(Rails.root.join('app', 'assets', 'images', file)) -%>
+      <%= favicon_link_tag(file, rel: 'apple-touch-icon', type: 'image/png', sizes: "#{size}x#{size}") %>
+  <% end -%>
 
-  <body>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="app">
+<div id="application-background"></div>
+<header>
+  <div class="container">
+    <%= link_to '<i class="fa fa-bars" aria-hidden="true"></i>'.html_safe, 'javascript:;', class: 'side-bar-button' %>
+
+    <%= link_to inline_svg('svg-logo.svg', title: 'Home', nocomment: true, class: 'app-logo'), dashboard_path %>
+    <div class="toolbar">
+      <%= link_to '<span style="font-size: 0.75em;">Logout</span> &nbsp;<i class="fa fa-user-circle-o" aria-hidden="true"></i>'.html_safe, logout_path, method: :delete %>
+    </div>
+  </div>
+
+  <div id="flash">
+    <% flash.each do |type, message| %>
+        <%= content_tag :p, class: "#{type} message" do
+          concat link_to '<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, 'javascript:;', class: 'close'
+          concat message
+        end
+        %>
+    <% end %>
+  </div>
+</header>
+<% controller_classes = [] -%>
+<div id="<%= controller_name.gsub('_', '-') %>" class="<%= controller_classes.join(' ') %>">
+  <div id="<%= action_name.gsub('_', '-') %>" class="app-action">
     <%= yield %>
-  </body>
+  </div>
+</div>
+</body>
 </html>

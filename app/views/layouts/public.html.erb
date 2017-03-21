@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -%>
+
+  <title>Rails Auth0</title>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+  <% %w(76 120 152 167 180).each do |size| %>
+      <%= favicon_link_tag "apple-touch-icon-#{size}x#{size}.png", rel: 'apple-touch-icon', type: 'image/png', sizes: "#{size}x#{size}" %>
+  <% end %>
+
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="public">
+<header>
+  <header>
+    <div id="flash">
+      <% flash.each do |type, message| %>
+          <%= content_tag :p, class: "#{type} message" do
+            concat link_to '<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, 'javascript:;', class: 'close'
+            concat message
+          end
+          %>
+      <% end %>
+    </div>
+
+    <div class="auth">
+      <% if authenticated? -%>
+          <%= link_to 'Logout', logout_path, method: :delete, class: 'logout' %>
+          <% claims = JSON.parse(Base64.decode64(auth0_jwt.split('.').second)).with_indifferent_access -%>
+          <span>JWT expires: <%= Time.at(claims[:exp]) %></span>
+      <% else -%>
+          <script>
+              <%# Customization options:  https://github.com/auth0/lock -%>
+              var auth0Options = {
+                  auth: {
+                      redirectUrl: '<%= Rails.application.secrets.auth0_callback_url %>',
+                      params: {
+                          scope: 'openid name email picture'
+                      }
+                  },
+                  languageDictionary: {
+                      title: 'Rails Auth0'
+                  },
+                  rememberLastLogin: true,
+                  allowLogin: true,
+                  allowSignUp: false
+              };
+              var auth0Lock = new Auth0Lock('<%= Rails.application.secrets.auth0_client_id %>', '<%= Rails.application.secrets.auth0_domain %>', auth0Options);
+
+              function signin() {
+                  auth0Lock.show();
+              }
+          </script>
+          <a class="" onclick="signin()">Login</a>
+      <% end -%>
+    </div>
+  </header>
+</header>
+<% controller_classes = [] -%>
+<div id="<%= controller_name.gsub('_', '-') %>" class="<%= controller_classes.join(' ') %>">
+  <div id="<%= action_name.gsub('_', '-') %>">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

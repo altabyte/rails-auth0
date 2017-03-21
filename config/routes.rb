@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get 'auth0/callback'
 
-  get 'auth0/failure'
+  match '/auth/auth0/callback', via: :get, to: 'auth0#callback'
+  match '/auth/failure', via: :get, to: 'auth0#failure'
+  match '/logout', via: :delete, to: 'auth0#logout'
 
-  get 'dashboard/index'
+  match '/dashboard', via: :get, to: 'dashboard#index'
 
   root 'public_pages#home'
 end

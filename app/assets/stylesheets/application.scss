@@ -1,10 +1,4 @@
-$color-white:               #FFFFFF;
-$color-blue-logo:           #0082bd;
-$color-cyan:                #3bbbe0;
-$color-background-blue:     #009ee7;
-$color-form-input:          #505a82;
-$color-form-field-error:    #a94442;
-
+@import 'base';
 @import 'font-awesome';
 @import 'global';
 @import 'simple_form';

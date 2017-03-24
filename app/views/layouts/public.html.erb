@@ -7,11 +7,13 @@
   <%# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -%>
 
   <title>Rails Auth0</title>
-  <%= favicon_link_tag 'favicon.ico' %>
-  <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
-  <% %w(76 120 152 167 180).each do |size| %>
-      <%= favicon_link_tag "apple-touch-icon-#{size}x#{size}.png", rel: 'apple-touch-icon', type: 'image/png', sizes: "#{size}x#{size}" %>
-  <% end %>
+  <%= favicon_link_tag('favicon.ico') if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicon.ico')) %>
+  <%= favicon_link_tag('apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png') if File.exists?(Rails.root.join('app', 'assets', 'images', 'apple-touch-icon.png')) %>
+  <% %w(76 120 152 167 180).each do |size| -%>
+      <% file = "apple-touch-icon-#{size}x#{size}.png" -%>
+      <% next unless File.exists?(Rails.root.join('app', 'assets', 'images', file)) -%>
+      <%= favicon_link_tag(file, rel: 'apple-touch-icon', type: 'image/png', sizes: "#{size}x#{size}") %>
+  <% end -%>
 
   <%= csrf_meta_tags %>
 

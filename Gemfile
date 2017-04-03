@@ -15,6 +15,9 @@ gem 'puma',                                             '~> 3.0'
 gem 'pg', '~> 0.20',                                    platform: :ruby
 gem 'activerecord-jdbcpostgresql-adapter',              platform: :jruby
 gem 'sass-rails',                                       '~> 5.0'
+gem 'redis',                                            '~> 3.3.3'
+gem 'redis-namespace',                                  '~> 1.5.3'
+gem 'redis-rails',                                      '~> 5.0.1'
 
 # Authorization
 gem 'auth0'                                             # Auth0 Ruby SDK

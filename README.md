@@ -30,6 +30,12 @@ For local testing and development copy [.env.example](.env.example) into the fol
 * .env.production
 
 
+### APP_NAME
+
+An identifier name for this app. This is to be used internally by the app
+in situations such as session key identifier and S3 paths.
+This should only contain URL safe characters and no spaces.
+
 ### SECRET_KEY_BASE
 
 Your secret key is used for verifying the integrity of signed cookies.

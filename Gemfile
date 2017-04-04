@@ -28,6 +28,7 @@ gem 'omniauth',                                         '~> 1.3.2'
 gem 'omniauth-auth0',                                   '~> 1.4.2'
 
 gem 'font-awesome-rails'                                # https://github.com/bokmann/font-awesome-rails
+gem 'gon'                                               # https://github.com/gazay/gon
 gem 'inline_svg'                                        # https://github.com/jamesmartin/inline_svg
 
 # Javascript

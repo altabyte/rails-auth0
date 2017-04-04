@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   force_ssl if: :ssl_configured?
 
+  before_action :set_locale
   after_action  :session_timestamp!
 
   helper_method :auth0_jwt
@@ -24,5 +25,10 @@ class ApplicationController < ActionController::Base
 
   def auth0_jwt
     session[:userinfo]&.fetch('credentials')&.fetch('id_token')
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+    gon.locale = I18n.locale if defined? Gon
   end
 end

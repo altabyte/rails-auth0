@@ -19,6 +19,8 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= include_gon(watch: false) if defined? Gon %>
+  <%= yield :javascript -%>
 </head>
 
 <body class="app">

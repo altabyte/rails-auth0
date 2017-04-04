@@ -4,7 +4,9 @@ I generally fork this application when starting a new rails 5.0
 [PostgreSQL](https://www.postgresql.org/) application
 that requires authentication via [Auth0](https://auth0.com/).
 
-This application uses [Redis](https://redis.io/) for the [session store](/blob/master/config/initializers/session_store.rb).
+This application uses [Redis](https://redis.io/) for the [session store](config/initializers/session_store.rb).
+My preferred redis hosting is [Redis Cloud](https://redislabs.com/), which is available as a
+[Heroku addon](https://elements.heroku.com/addons/rediscloud).
 
 ## Setup
 

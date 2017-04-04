@@ -4,9 +4,9 @@ namespace :sessions do
   task purge: :environment do
     begin
       key_prefix = "session:#{ENV['APP_NAME']}:#{Rails.env}"
-      keys = $redis.keys.select { |key| key.starts_with? key_prefix }
+      keys = Redis.current.keys.select { |key| key.starts_with? key_prefix }
       keys.each do |key|
-        session = $redis.get key
+        session = Redis.current.get key
         next unless session
         destroy_session(key, session)
       end
@@ -28,12 +28,12 @@ namespace :sessions do
 
   def destroy_session(key, session)
     print key if verbose?
-    json = Marshal.restore(session).to_s.gsub('=>', ':')
+    json = Marshal.load(session).to_s.gsub('=>', ':')
     hash = JSON.parse(json)
     return unless hash.key? 'updated_at'
     updated_at = hash['updated_at'].to_i
     if updated_at + ttl < Time.now.utc.to_i
-      $redis.del key
+      Redis.current.del key
       print ', DESTROYED' if verbose?
     end
     print "\n"

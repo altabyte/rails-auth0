@@ -7,6 +7,8 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Include:
     - rubocop-rspec
+    - '**/Gemfile'
+    - '**/Rakefile'
   Exclude:
     - spec/support/auth0_support.rb
 
@@ -30,6 +32,10 @@ Metrics/BlockLength:
 # Extend the maximum line length to 120 characters.
 Metrics/LineLength:
   Max: 120
+
+Security/MarshalLoad:
+  Exclude:
+    - lib/tasks/sessions.rake
 
 # Allow block comments to be used.
 # =begin

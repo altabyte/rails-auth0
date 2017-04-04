@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Must be before other gems that rely on environmental variables!
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: %i[development test]
 
 gem 'rails',                                            '~> 5.0.1'
 gem 'puma',                                             '~> 3.0'
@@ -84,7 +84,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

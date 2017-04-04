@@ -13,7 +13,6 @@ class Auth0Controller < ApplicationController
     redirect_to dashboard_path, notice: "Logged in as #{session[:userinfo][:info][:email]}"
   end
 
-
   # If user authentication fails on the provider side OmniAuth will redirect to /auth/failure,
   # passing the error message in the 'message' request param.
   def failure

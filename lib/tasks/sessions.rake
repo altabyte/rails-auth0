@@ -14,28 +14,27 @@ namespace :sessions do
       puts e
     end
   end
+end
 
-  #---------------------------------------------------------------------------
-  private
+#---------------------------------------------------------------------------
+private
 
-  def verbose?
-    true
-  end
+def verbose?
+  true
+end
 
-  def ttl
-    ENV.fetch('SESSION_TTL', 7.days.to_i)
-  end
+def ttl
+  ENV.fetch('SESSION_TTL', 7.days.to_i)
+end
 
-  def destroy_session(key, session)
-    print key if verbose?
-    json = Marshal.load(session).to_s.gsub('=>', ':')
-    hash = JSON.parse(json)
-    return unless hash.key? 'updated_at'
-    updated_at = hash['updated_at'].to_i
-    if updated_at + ttl < Time.now.utc.to_i
-      Redis.current.del key
-      print ', DESTROYED' if verbose?
-    end
-    print "\n"
-  end
+def destroy_session(key, session)
+  updated_at = session_to_hash(session)['updated_at'].to_i
+  return unless updated_at + ttl < Time.now.utc.to_i
+  Redis.current.del key
+  puts "#{key}, DESTROYED"
+end
+
+def session_to_hash(session)
+  json = Marshal.load(session).to_s.gsub('=>', ':')
+  JSON.parse(json)
 end

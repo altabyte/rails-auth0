@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   private
 
   def ssl_configured?
-    ENV.fetch('FORCE_SSL', false).to_s.downcase.in? %w'1 true yes'
+    ENV.fetch('FORCE_SSL', false).to_s.downcase.in? %w[1 true yes]
   end
 
   # Capture timestamp after each action, so can later cleanup stale sessions.

@@ -64,6 +64,13 @@ end
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+# RoutingFilter should not be enabled in functional tests by default since the Rails router
+# gets bypassed for most testcases. Having RoutingFilter enabled in this setup can cause
+# missing parameters in the test environment.
+#
+# Routing tests can/should re-enable RoutingFilter since the whole routing stack gets executed for these testcases.
+RoutingFilter.active = true
+
 RSpec.configure do |config|
   config.before :suite do
     Strategy.set :transaction

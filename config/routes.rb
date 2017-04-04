@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  filter :locale, exclude: %r{\A/auth/auth0/callback|/auth/failure}
+
   match '/auth/auth0/callback', via: :get, to: 'auth0#callback'
   match '/auth/failure', via: :get, to: 'auth0#failure'
   match '/logout', via: :delete, to: 'auth0#logout'

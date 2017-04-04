@@ -19,6 +19,9 @@ gem 'redis',                                            '~> 3.3.3'
 gem 'redis-namespace',                                  '~> 1.5.3'
 gem 'redis-rails',                                      '~> 5.0.1'
 
+#
+gem 'routing-filter'                                    # https://github.com/svenfuchs/routing-filter
+
 # Authorization
 gem 'auth0'                                             # Auth0 Ruby SDK
 gem 'omniauth',                                         '~> 1.3.2'

@@ -4,12 +4,14 @@ I generally fork this application when starting a new rails 5.0
 [PostgreSQL](https://www.postgresql.org/) application
 that requires authentication via [Auth0](https://auth0.com/).
 
+This application uses [Redis](https://redis.io/) for the [session store](/blob/master/config/initializers/session_store.rb).
+
 ## Setup
 
 Be sure to set the relevant [environmental variables](#env-vars) before running this setup.
 
 ```shell
-rvm install ruby-2.4.0
+rvm install ruby-2.4.1
 gem install bundler
 
 ./bin/bundle install --path=vendor/bundle
@@ -46,6 +48,12 @@ Use the following command to generate a new secret key:
 ```shell 
 ./bin/rails secret 
 ``` 
+
+### FORCE_SSL
+A boolean switch to determine if SSL connections should be forced. When active this 
+will redirect `http://` requests to `https://`.
+Acceptable values are `true` and `false`. If this environmental variable is not
+defined, **false** is assumed.
 
 ### DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_URL
 

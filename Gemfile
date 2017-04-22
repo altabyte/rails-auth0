@@ -10,14 +10,14 @@ end
 # Must be before other gems that rely on environmental variables!
 gem 'dotenv-rails', groups: %i[development test]
 
-gem 'rails',                                            '~> 5.0.1'
+gem 'rails',                                            '~> 5.0.2'
 gem 'puma',                                             '~> 3.0'
 gem 'pg', '~> 0.20',                                    platform: :ruby
 gem 'activerecord-jdbcpostgresql-adapter',              platform: :jruby
 gem 'sass-rails',                                       '~> 5.0'
 gem 'redis',                                            '~> 3.3.3'
 gem 'redis-namespace',                                  '~> 1.5.3'
-gem 'redis-rails',                                      '~> 5.0.1'
+gem 'redis-rails',                                      '~> 5.0.2'
 
 #
 gem 'routing-filter'                                    # https://github.com/svenfuchs/routing-filter
@@ -67,8 +67,8 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console',                                    '>= 3.4.0'
-  gem 'listen',                                         '~> 3.0.8'
+  gem 'web-console',                                    '>= 3.4'
+  gem 'listen',                                         '>= 3.1'
 
   # Spring speeds up development by keeping your application running in the background.
   # Read more: https://github.com/rails/spring

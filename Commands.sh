@@ -6,8 +6,11 @@
 
 rails new rails-auth0 -T --database=postgresql
 
+./bin/bundle binstub brakeman
+./bin/bundle binstub rubocop
+
 # Generate the .rubocop_todo.yml config file.
-rubocop --auto-gen-config
+./bin/rubocop --auto-gen-config
 
 # Install PostgreSQL extensions.
 ./bin/rails g migration add_hstore

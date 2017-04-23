@@ -2,8 +2,6 @@
 #
 #  https://github.com/bbatsov/rubocop/blob/master/config/default.yml
 
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   Include:
     - rubocop-rspec
@@ -11,6 +9,7 @@ AllCops:
     - '**/Rakefile'
   Exclude:
     - spec/support/auth0_support.rb
+    - vendor/**/*
 
 # Include: **/Gemfile, **/gems.rb
 Bundler/OrderedGems:
@@ -58,6 +57,9 @@ Style/EmptyLinesAroundModuleBody:
   EnforcedStyle: empty_lines_except_namespace
 
 Style/ExtraSpacing:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 # Allow { :this } and [ :this ]

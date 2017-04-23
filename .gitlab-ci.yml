@@ -25,7 +25,8 @@ variables:
 
 before_script:
   - apt-get update -qy
-  - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake redis
+  - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
+  - apt-get -y install redis-server
   - apt-get install -y nodejs # wkhtmltopdf xvfb
 
   - ruby -v

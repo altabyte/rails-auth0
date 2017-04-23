@@ -26,9 +26,12 @@ variables:
 before_script:
   - apt-get update -qy
   - apt-get install -y nodejs # wkhtmltopdf xvfb
+  - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
+  - apt-get install -y redis-server
 
   - ruby -v
   - which ruby
+  - which pg_dump
   - export
 
   # https://devcenter.heroku.com/articles/ruby-support#libraries

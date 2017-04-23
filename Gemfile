@@ -76,6 +76,7 @@ group :development do
   gem 'spring-watcher-listen',                          '~> 2.0.0'
 
   gem 'brakeman',       require: false
+  gem 'bundler-audit',  require: false
   gem 'rubocop',        require: false
   gem 'rubocop-rspec',  require: false
 end

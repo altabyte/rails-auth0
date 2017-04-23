@@ -7,6 +7,7 @@
 rails new rails-auth0 -T --database=postgresql
 
 ./bin/bundle binstub brakeman
+./bin/bundle binstub bundler-audit
 ./bin/bundle binstub rubocop
 
 # Generate the .rubocop_todo.yml config file.

@@ -29,8 +29,6 @@ before_script:
 
   - ruby -v
   - which ruby
-  - psql --version
-  - which psql
   - export
 
   # https://devcenter.heroku.com/articles/ruby-support#libraries

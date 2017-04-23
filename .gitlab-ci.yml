@@ -5,21 +5,33 @@ stages:
   - deploy
 
 variables:
-  APP_NAME: 'Rails-Auth0'
-  BUNDLER_VERSION: '1.13.7'
-  DATABASE_HOST: 'postgres'
-  DATABASE_NAME: 'rails_auth0'
-  DATABASE_USERNAME: 'runner'
-  DISPLAY: ':99'
-  POSTGRES_DB: 'rails_auth0'
-  POSTGRES_USER: 'runner'
-  POSTGRES_PASSWORD: ''
-  REDIS_URL: 'redis://localhost:6379/0'
-  SPEC_RETRIES: '3'
+  APP_NAME:             'Rails-Auth0'
+  BUNDLER_VERSION:      '1.13.7'
+
+  POSTGRES_DB:          'rails_auth0'
+  POSTGRES_USER:        'runner'
+  POSTGRES_PASSWORD:    ''
+
+  # The following will be used in config/database.yml
+  DATABASE_NAME:        'rails_auth0'
+  DATABASE_USERNAME:    'runner'
+  DATABASE_PASSWORD:    ''
+  DATABASE_HOST:        'postgres'
+
+  REDIS_URL:            'redis://localhost:6379/0'
+
+  DISPLAY:              ':99'
+  SPEC_RETRIES:         '3'
 
 before_script:
   - apt-get update -qy
+  - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake redis
   - apt-get install -y nodejs # wkhtmltopdf xvfb
+
+  - ruby -v
+  - which ruby
+  - psql --version
+  - which psql
 
   # https://devcenter.heroku.com/articles/ruby-support#libraries
   # Bundler version used by Heroku is 1.13.7

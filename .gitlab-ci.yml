@@ -5,9 +5,11 @@ stages:
   - deploy
 
 variables:
+  APP_NAME: 'Rails-Auth0'
   BUNDLER_VERSION: '1.13.7'
   DATABASE_URL: "postgres://postgres@postgres/rails_auth0"
   DISPLAY: ":99"
+  REDIS_URL: 'redis://localhost:6379/0'
   SPEC_RETRIES: "3"
 
 before_script:
@@ -17,7 +19,7 @@ before_script:
   # https://devcenter.heroku.com/articles/ruby-support#libraries
   # Bundler version used by Heroku is 1.13.7
   - gem install bundler --no-ri --no-rdoc -v $BUNDLER_VERSION
-  - bundle install --deployment --jobs $(nproc) # --path vendor/bundle
+  - bundle install --deployment --jobs $(nproc) --path vendor/bundle
 
 rubocop:
   stage: test
@@ -48,6 +50,7 @@ rspec:
 
   services:
    - postgres:latest
+   - redis:latest
 
   script:
     - bundle exec rake db:drop || true

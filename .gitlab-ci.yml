@@ -16,7 +16,7 @@ before_script:
 
   # https://devcenter.heroku.com/articles/ruby-support#libraries
   # Bundler version used by Heroku is 1.13.7
-  - gem install bundler -​-no-document -v $BUNDLER_VERSION
+  - gem install bundler --no-ri --no-rdoc -v $BUNDLER_VERSION
   - bundle install --deployment --jobs $(nproc) # --path vendor/bundle
 
 rubocop:
@@ -58,7 +58,7 @@ rspec:
 # https://docs.gitlab.com/ce/ci/yaml/#special-yaml-features
 .install_dpl: &dpl # Hidden key that defines an anchor named 'dpl'
   script:
-    - gem install dpl -v '1.8.31' -​-no-document
+    - gem install dpl -v '1.8.31' --no-ri --no-rdoc
 
 staging:
   <<: *dpl

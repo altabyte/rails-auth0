@@ -79,24 +79,28 @@ rspec:
     - bundle exec rake db:seed    RAILS_ENV=test
     - bundle exec rspec spec
 
+#-----------------------------------------------------------------------------
+# Deployment
+#
 # https://docs.gitlab.com/ce/ci/yaml/#special-yaml-features
-.install_dpl: &dpl # Hidden key that defines an anchor named 'dpl'
+.deploy_with_dpl: &dpl # Hidden key that defines an anchor named 'dpl'
   script:
     - gem install dpl -v '1.8.31' --no-ri --no-rdoc
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
 
 staging:
   <<: *dpl
+  variables:
+    - HEROKU_APP_NAME: $HEROKU_STAGING_APP_NAME
   stage: deploy
-  script:
-    - dpl --provider=heroku --app=$HEROKU_STAGING_APP_NAME --api-key=$HEROKU_API_KEY
   only:
     - master
 
 # To deploy to production, create a Merge Request from master branch to production branch.
 production:
   <<: *dpl
+  variables:
+    - HEROKU_APP_NAME: $HEROKU_PRODUCTION_APP_NAME
   stage: deploy
-  script:
-    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_APP_NAME --api-key=$HEROKU_API_KEY
   only:
     - production

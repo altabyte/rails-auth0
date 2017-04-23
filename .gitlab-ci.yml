@@ -13,10 +13,10 @@ variables:
   POSTGRES_PASSWORD:    ''
 
   # The following will be used in config/database.yml
-  DATABASE_NAME:        'rails_auth0'
-  DATABASE_USERNAME:    'runner'
-  DATABASE_PASSWORD:    ''
   DATABASE_HOST:        'postgres'
+  DATABASE_NAME:        $POSTGRES_DB
+  DATABASE_USERNAME:    $POSTGRES_USER
+  DATABASE_PASSWORD:    $POSTGRES_PASSWORD
 
   REDIS_URL:            'redis://localhost:6379/0'
 
@@ -25,14 +25,13 @@ variables:
 
 before_script:
   - apt-get update -qy
-  - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
-  - apt-get -y install redis-server
   - apt-get install -y nodejs # wkhtmltopdf xvfb
 
   - ruby -v
   - which ruby
   - psql --version
   - which psql
+  - export
 
   # https://devcenter.heroku.com/articles/ruby-support#libraries
   # Bundler version used by Heroku is 1.13.7
@@ -71,10 +70,11 @@ rspec:
    - redis:latest
 
   script:
-    - bundle exec rake db:drop || true
-    - bundle exec rake db:create db:migrate
-    - bundle exec rake db:seed
-    - bundle exec rspec ./spec
+    - bundle exec rake db:drop    RAILS_ENV=test || true
+    - bundle exec rake db:create  RAILS_ENV=test
+    - bundle exec rake db:migrate RAILS_ENV=test
+    - bundle exec rake db:seed    RAILS_ENV=test
+    - bundle exec rspec spec
 
 # https://docs.gitlab.com/ce/ci/yaml/#special-yaml-features
 .install_dpl: &dpl # Hidden key that defines an anchor named 'dpl'

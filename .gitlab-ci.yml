@@ -1,0 +1,78 @@
+image: ruby:2.4.1
+
+stages:
+  - test
+  - deploy
+
+variables:
+  BUNDLER_VERSION: '1.13.7'
+  DATABASE_URL: "postgres://postgres@postgres/rails_auth0"
+  DISPLAY: ":99"
+  SPEC_RETRIES: "3"
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y nodejs # wkhtmltopdf xvfb
+
+  # https://devcenter.heroku.com/articles/ruby-support#libraries
+  # Bundler version used by Heroku is 1.13.7
+  - gem install bundler -​-no-document -v $BUNDLER_VERSION
+  - bundle install --deployment --jobs $(nproc) # --path vendor/bundle
+
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop
+  allow_failure: true
+
+audit_gems:
+  stage: test
+  script:
+    - bundle exec bundle-audit update
+    - bundle exec bundle-audit -v
+  allow_failure: false
+
+brakeman:
+  stage: test
+  script:
+    - bundle exec brakeman --no-progress
+  allow_failure: false
+
+rspec:
+  stage: test
+
+  cache:
+    key: 'bundle'
+    paths:
+      - vendor/bundle
+
+  services:
+   - postgres:latest
+
+  script:
+    - bundle exec rake db:drop || true
+    - bundle exec rake db:create db:migrate
+    - bundle exec rake db:seed
+    - bundle exec rspec ./spec
+
+# https://docs.gitlab.com/ce/ci/yaml/#special-yaml-features
+.install_dpl: &dpl # Hidden key that defines an anchor named 'dpl'
+  script:
+    - gem install dpl -v '1.8.31' -​-no-document
+
+staging:
+  <<: *dpl
+  stage: deploy
+  script:
+    - dpl --provider=heroku --app=$HEROKU_STAGING_APP_NAME --api-key=$HEROKU_API_KEY
+  only:
+    - master
+
+# To deploy to production, create a Merge Request from master branch to production branch.
+production:
+  <<: *dpl
+  stage: deploy
+  script:
+    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_APP_NAME --api-key=$HEROKU_API_KEY
+  only:
+    - production

@@ -29,9 +29,11 @@ before_script:
   - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
   - apt-get install -y redis-server
 
+  - uname -a
   - ruby -v
   - which ruby
   - which pg_dump
+  - pg_dump --version
   - export
 
   # https://devcenter.heroku.com/articles/ruby-support#libraries
@@ -67,7 +69,7 @@ rspec:
       - vendor/bundle
 
   services:
-   - postgres:latest
+   - postgres:9.4.10
    - redis:latest
 
   script:

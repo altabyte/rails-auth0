@@ -7,6 +7,15 @@ This application uses [Redis](https://redis.io/) for the [session store](config/
 My preferred redis hosting is [Redis Cloud](https://redislabs.com/), which is available as a
 [Heroku addon](https://elements.heroku.com/addons/rediscloud).
 
+Where possible I try to follow best [security practices](https://github.com/brunofacca/zen-rails-security-checklist)
+and [ruby style guides](https://github.com/bbatsov/ruby-style-guide) throughout my code.
+
+This app includes a [GitLab CI](https://about.gitlab.com/gitlab-ci/) config [script](.gitlab-ci.yml) that runs
+[Rubocop](http://batsov.com/rubocop/), [Bundler Audit](https://github.com/rubysec/bundler-audit),
+[Brakeman](http://brakemanscanner.org/) and [RSpec](http://rspec.info/) before automatically deploying to
+[Heroku](https://www.heroku.com/) staging and production. Pushes to GitLab `master` branch will automatically deploy 
+to Heroku staging, while merge requests into a `production` branch will deploy to Heroku production.
+
 ## Setup
 
 Install [Ruby](https://www.ruby-lang.org/) and the [Bundler](http://bundler.io/) gem if necessary.
@@ -27,6 +36,12 @@ gem install bundler
 ```
 
 Be sure to set the relevant [environmental variables](#env-vars) before running the following setup.
+Also set the environmental variables on deployment environments, such as [Heroku](https://www.heroku.com/)
+before uploading the code to the server. 
+
+For Heroku this means installing a suitable
+[Redis add-on](https://elements.heroku.com/search/addons?utf8=%E2%9C%93&q=redis) and setting the 
+`REDIS_URL` environmental variable before first deploying the code.
 
 ```shell
 ./bin/bundle install --path=vendor/bundle
@@ -34,14 +49,6 @@ Be sure to set the relevant [environmental variables](#env-vars) before running 
 # Configure DB name environmental variables first.
 ./bin/rake db:setup
 ```
-
-## Rebranding
-
-To rebrand this application for your own purposes, it is recommended to change the module name from `RailsAuth0`
-to something more relevant in [config/application.rb](config/application.rb).
-
-You will also need to change the database connection parameters in [config/database.yml](config/database.yml)
-or set them using environmental variables.
 
 ## Environmental variables <a name="env-vars"></a>
 
@@ -85,11 +92,16 @@ The database connection URL if deployed on platforms such as [Heroku](https://ww
 You can optionally choose to specify the following database config values as environmental variables
 if you prefer not to put them in [config/database.yml](config/database.yml).
 
-  1. DATABASE_NAME
+  1. `DATABASE_NAME`
 
-  2. DATABASE_USERNAME
+  2. `DATABASE_USERNAME`
 
-  3. DATABASE_PASSWORD
+  3. `DATABASE_PASSWORD`
+  
+  4. `DATABASE_HOST`
+  
+**Note**: `DATABASE_HOST` is generally always its default value of `localhost`,
+but must be set to `postgres` for GitLab CI.
 
 ### AUTH0_DOMAIN
 
@@ -154,3 +166,11 @@ Run [Brakeman](http://brakemanscanner.org/) before each deploy with the followin
 ```
 Brakeman is an open source vulnerability scanner specifically designed for Ruby on Rails applications.
 It statically analyzes Rails application code to find security issues at any stage of development.
+
+## Re-branding
+
+To re-brand this application for your own purposes, it is recommended to change the module name from `RailsAuth0`
+to something more relevant in [config/application.rb](config/application.rb).
+
+You will also need to change the database connection parameters in [config/database.yml](config/database.yml)
+or set them using environmental variables.

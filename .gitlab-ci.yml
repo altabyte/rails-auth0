@@ -15,7 +15,7 @@ variables:
   POSTGRES_USER: 'runner'
   POSTGRES_PASSWORD: ''
   REDIS_URL: 'redis://localhost:6379/0'
-  SPEC_RETRIES: 3
+  SPEC_RETRIES: '3'
 
 before_script:
   - apt-get update -qy

@@ -7,6 +7,7 @@ stages:
 variables:
   APP_NAME: 'Rails-Auth0'
   BUNDLER_VERSION: '1.13.7'
+  DATABASE_HOST: 'postgres'
   DATABASE_URL: "postgres://postgres@postgres/rails_auth0"
   DISPLAY: ":99"
   REDIS_URL: 'redis://localhost:6379/0'

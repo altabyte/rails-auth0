@@ -32,6 +32,7 @@ default: &default
 development:
   <<: *default
   database: <%= ENV.fetch("DATABASE_NAME") { 'rails_auth0_dev' } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -67,6 +68,7 @@ development:
 test:
   <<: *default
   database: <%= ENV.fetch("DATABASE_NAME") { 'rails_auth0_test' } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %> # Set to 'postgres' for GitLab CI
 
 
 # As with config/secrets.yml, you never want to store sensitive information,

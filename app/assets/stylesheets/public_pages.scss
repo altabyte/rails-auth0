@@ -1,1 +1,50 @@
 @import 'base';
+
+#public-pages {
+  #home {
+    text-align: center;
+
+    div.company-logo {
+      margin: 35px 0;
+      height: 250px;
+
+      svg.company-logo {
+        transition: 0.5s;
+        width: 275px;
+
+        &:hover {
+          width: 300px;
+        }
+
+        .st0 {
+          fill: $color-white;
+        }
+
+        .st1 {
+          fill: $color-crimson;
+        }
+      }
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+
+    a.login, a.dashboard {
+      display: inline-block;
+      width: 200px;
+      padding: 5px 0;
+      border: 3px solid $color-white;
+      border-radius: 5px;
+      font-weight: bold;
+      color: $color-white;
+      transition: 0.5s;
+
+      &:hover {
+        background-color: $color-white;
+        color: $color-royal-blue;
+      }
+    }
+  }
+}

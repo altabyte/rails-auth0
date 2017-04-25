@@ -1,6 +1,18 @@
 $color-white              : #FFFFFF;
+$color-blue               : #0285d1;
 $color-blue-logo          : #0082bd;
+$color-charcoal           : #303741;
+$color-crimson            : #DE0831;
 $color-cyan               : #3bbbe0;
 $color-background-blue    : #009ee7;
 $color-form-input         : #505a82;
 $color-form-field-error   : #a94442;
+$color-gray-border        : #DDDDDD;
+$color-gray-light         : #edf1f2;
+$color-royal-blue         : #2B286B;
+
+$color-text               : lighten($color-charcoal, 10%);
+
+$app-header-height        : 40px;
+$app-aside-width          : 60px;
+$app-aside-width-hover    : 200px;

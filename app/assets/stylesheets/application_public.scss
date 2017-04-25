@@ -3,4 +3,28 @@
 body.public {
   $transition-time: 0.3s;
   $navbar-height: 70px;
+
+  color: #FFFFFF;
+
+  #application-background {
+    $color-bg-gradient-1: darken($color-charcoal, 5%);
+    $color-bg-gradient-2: $color-blue; // darken($color-charcoal-1, 1.5%);
+    z-index: -1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-charcoal;
+    //background: -webkit-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+    //background: -o-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+    //background: -moz-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+    //background: radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
+
+    background: $color-bg-gradient-1; /* Old browsers */
+    background: -moz-linear-gradient(-75deg, $color-bg-gradient-1 0%, $color-bg-gradient-2 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-75deg, $color-bg-gradient-1 0%,$color-bg-gradient-2 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(165deg, $color-bg-gradient-1 0%,$color-bg-gradient-2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-bg-gradient-1', endColorstr='$color-bg-gradient-2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  }
 }

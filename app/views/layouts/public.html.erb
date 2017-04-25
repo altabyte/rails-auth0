@@ -9,13 +9,13 @@
   <title>Rails Auth0</title>
 
   <%# http://realfavicongenerator.net/ -%>
-  <%= favicon_link_tag('favicon/favicon.ico') if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicon', 'favicon.ico')) %>
+  <%= favicon_link_tag('favicons/favicon.ico') if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicons', 'favicon.ico')) %>
   <% %w{32 16}.each do |size| -%>
-      <%= favicon_link_tag("favicon/favicon-#{size}x#{size}.png", type: 'image/png', sizes: "#{size}x#{size}") if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicon', "favicon-#{size}x#{size}.png")) %>
+      <%= favicon_link_tag("favicons/favicon-#{size}x#{size}.png", type: 'image/png', sizes: "#{size}x#{size}") if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicons', "favicon-#{size}x#{size}.png")) %>
   <% end -%>
-  <%= favicon_link_tag('favicon/apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180') if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicon', 'apple-touch-icon.png')) %>
-  <link rel="mask-icon" href='/assets/favicon/safari-pinned-tab.svg' color='#DE0831'>
-  <%= favicon_link_tag('/assets/favicon/safari-pinned-tab.svg', rel: 'mask-icon', type: 'image/svg', color: '#DE0831') %>
+  <%= favicon_link_tag('favicons/apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180') if File.exists?(Rails.root.join('app', 'assets', 'images', 'favicons', 'apple-touch-icon.png')) %>
+  <link rel="mask-icon" href='/assets/favicons/safari-pinned-tab.svg' color='#DE0831'>
+  <%= favicon_link_tag('/assets/favicons/safari-pinned-tab.svg', rel: 'mask-icon', type: 'image/svg', color: '#DE0831') %>
   <meta name="theme-color" content="#ffffff">
 
   <%= csrf_meta_tags %>

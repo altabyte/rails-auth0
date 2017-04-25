@@ -50,6 +50,15 @@ For Heroku this means installing a suitable
 ./bin/rake db:setup
 ```
 
+### favicon
+
+This app will render a favicon, but only if it exists at 
+[app/assets/images/favicons/favicon.ico](app/assets/images/favicons/favicon.ico).
+There is a convenient tool at [https://realfavicongenerator.net/](https://realfavicongenerator.net/) 
+that generates favicons suitable for all browsers and other platforms such as iOS, Android and Windows.
+Simply upload your sample image and then extract the generated *favicons.zip* into 
+[app/assets/images/](app/assets/images/).
+
 ## Environmental variables <a name="env-vars"></a>
 
 Example values of the environmental variables used in this app can be found in [`.env.example`](.env.example)

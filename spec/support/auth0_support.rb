@@ -2,27 +2,30 @@ module Auth0RequestSpecHelper
 
   # Stub the value of `session[:userinfo]` with Auth0 user credentials.
   #
-  def assign_session_for_auth0(email: Faker::Internet.email, email_verified: true, jwt_base64: nil)
-    session[:userinfo] = auth0_hash(email: email, email_verified: email_verified, jwt_base64: jwt_base64)
+  def assign_session_for_auth0(email: Faker::Internet.email, email_verified: true, id_token: nil)
+    session[:userinfo] = auth0_hash(email: email, email_verified: email_verified, id_token: id_token)
   end
 
 
   # Set the value of `request.env['omniauth.auth']` for use in the Auth0 callback method after registration or login.
   # `Auth0Controller#callback` is responsible for assigning `session[:userinfo]`.
   #
-  def assign_request_env_for_auth0(email: Faker::Internet.email, email_verified: true, jwt_base64: nil)
-    request.env['omniauth.auth'] = auth0_hash(email: email, email_verified: email_verified, jwt_base64: jwt_base64)
+  def assign_request_env_for_auth0(email: Faker::Internet.email, email_verified: true, id_token: nil)
+    request.env['omniauth.auth'] = auth0_hash(email: email, email_verified: email_verified, id_token: id_token)
   end
 
 
   #-----------------------------------------------------------------------------
   private
 
-  def auth0_hash(email: Faker::Internet.email, email_verified: true, jwt_base64: nil)
+  def auth0_hash(email: Faker::Internet.email, email_verified: true, id_token: nil)
     uid = SecureRandom.hex(24)
     nickname ||= email.split('@').first
     credentials_token ||= '304mMerJESt6zBBE'
-    jwt_base64 ||= 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiYWx0YWJ5dGVAZ21haWwuY29tIiwiZW1haWwiOiJhbHRhYnl0ZUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGljdHVyZSI6Imh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyL2ZkNmM0MjM2ODBkNDZmMDkyMzkzM2Y3ZThhYTc2Y2JjP3M9NDgwJnI9cGcmZD1odHRwcyUzQSUyRiUyRmNkbi5hdXRoMC5jb20lMkZhdmF0YXJzJTJGYWwucG5nIiwiaXNzIjoiaHR0cHM6Ly9iZWFkY2FuLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ODdlYmNiZjcyOTJkNDY0Yzg2MDU0NzYiLCJhdWQiOiJpUTlaQU1jd2ZtM0hpUzcxTHZCSEFZTEI1djl5NTJLcyIsImV4cCI6MTQ4NDkxMTU1NCwiaWF0IjoxNDg0ODc1NTU0fQ.eibvh6guJnaQi4TfyfEfGwYEwdITf3Vm8X19PQ1UEO8'
+
+    # ID Token expires: '2020-12-31T23:59'
+    # @see https://jwt.io/
+    id_token ||= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImV4cCI6MTYwOTQ1OTE0MH0.gnCidNCNEGy4zPWqmdDIaMk3QHI10a2ckAb2txaxgWg'
 
     json = <<EOQ
 {
@@ -40,7 +43,7 @@ module Auth0RequestSpecHelper
   "credentials": {
     "token": "#{credentials_token}",
     "expires": true,
-    "id_token": "#{jwt_base64}",
+    "id_token": "#{id_token}",
     "token_type": "Bearer"
   },
   "extra": {

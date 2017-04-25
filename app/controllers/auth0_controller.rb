@@ -5,6 +5,8 @@ class Auth0Controller < ApplicationController
 
   before_action :set_session_userinfo, only: :callback
 
+  layout 'public'
+
   # OmniAuth places the User Profile information (retrieved by omniauth-auth0) in request.env['omniauth.auth'].
   # In this tutorial, you will store that info in the session, under 'userinfo'.
   # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
@@ -19,6 +21,9 @@ class Auth0Controller < ApplicationController
     @error_msg = request.params['message']
     puts @error_msg
   end
+
+  # Dedicated login page using Auth0 Lock.
+  def login; end
 
   # Remember to register the *Allowed Logout URLs* at the following link.
   #

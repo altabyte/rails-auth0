@@ -12,7 +12,16 @@ module Secured
   private
 
   def logged_in_using_omniauth?
-    redirect_to(root_path, alert: 'Please log in to access') unless session[:userinfo].present?
+    if session[:userinfo].present?
+      begin
+        JWT.decode(auth0_id_token, nil, false)
+      rescue JWT::ExpiredSignature
+        session.delete(:userinfo)
+        redirect_to(login_path, alert: 'Session expired')
+      end
+    else
+      redirect_to(login_path, alert: 'Please log in to access')
+    end
   end
 
 end

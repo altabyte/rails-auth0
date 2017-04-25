@@ -5,7 +5,7 @@ RSpec.describe DashboardController, type: :controller do
   context 'Not authenticated' do
     it 'returns http success' do
       get :index
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to login_path
     end
   end
 

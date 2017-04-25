@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   after_action  :session_timestamp!
 
-  helper_method :auth0_jwt
+  helper_method :auth0_id_token
 
   #---------------------------------------------------------------------------
   private
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     session['updated_at'] = Time.now.utc.to_i
   end
 
-  def auth0_jwt
+  def auth0_id_token
     session[:userinfo]&.fetch('credentials')&.fetch('id_token')
   end
 

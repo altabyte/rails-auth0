@@ -72,6 +72,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RoutingFilter.active = true
 
 RSpec.configure do |config|
+
   config.before :suite do
     Strategy.set :transaction
     DatabaseCleaner.clean_with :truncation
@@ -89,6 +90,12 @@ RSpec.configure do |config|
     end
   end
 
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
   # Add Devise test helpers.
   if defined? Devise
     config.include Devise::Test::ControllerHelpers,  type: :controller
@@ -99,11 +106,8 @@ RSpec.configure do |config|
     config.include RedirectUnauthenticated,          type: :controller
   end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
-  end
+  # Auth0 session helpers.
+  config.include Auth0RequestSpecHelper
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

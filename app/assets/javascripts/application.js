@@ -14,6 +14,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require open_source/jquery.dropdown
 //= require turbolinks
 //= require public_pages
 //= require dashboard

@@ -32,7 +32,7 @@ gem 'font-awesome-rails'                                # https://github.com/bok
 gem 'gon'                                               # https://github.com/gazay/gon
 gem 'inline_svg'                                        # https://github.com/jamesmartin/inline_svg
 gem 'redcarpet'                                         # https://github.com/vmg/redcarpet
-gem 'simple_form'                                       # https://github.com/plataformatec/simple_form
+# gem 'simple_form'                                     # https://github.com/plataformatec/simple_form
 
 # Javascript
 gem 'coffee-rails',                                     '~> 4.2'
@@ -82,6 +82,8 @@ group :development do
   gem 'brakeman',       require: false
   gem 'rubocop',        require: false
   gem 'rubocop-rspec',  require: false
+
+  gem 'bundler-audit',  require: false
 end
 
 group :test do

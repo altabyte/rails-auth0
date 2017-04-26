@@ -1,13 +1,37 @@
 @import 'base';
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 body.app {
 
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: $color-text;
+
+  h1, h2, h3, h4 {
+    font-weight: bold;
+    margin: 9px 0 3px;
+    letter-spacing: 0;
+  }
+
   h1 {
-    margin-bottom: 12px;
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+
+  p {
+    margin-bottom: 8px;
   }
 
   a {
-    color: $color-white;
+    color: $color-blue;
   }
 
   a, svg {
@@ -16,8 +40,8 @@ body.app {
   }
 
   #application-background {
-    $color-bg-gradient-1: lighten($color-background-blue, 2%);
-    $color-bg-gradient-2: darken($color-background-blue, 15%);
+    $color-bg-gradient-1: lighten($color-gray-light, 5%);
+    $color-bg-gradient-2: darken($color-gray-light, 2.5%);
 
     z-index: -1000;
     position: fixed;
@@ -25,47 +49,71 @@ body.app {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $color-background-blue;
+    background-color: $color-gray-light;
     background: -webkit-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
     background: -o-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
     background: -moz-radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
     background: radial-gradient($color-bg-gradient-1, $color-bg-gradient-2);
   }
 
-  color: $color-white;
-
   header {
     border-bottom: 1px solid darken($color-background-blue, 6%);
     margin-bottom: 18px;
     width: 100%;
 
-    div.container {
-      position: relative;
+    section.header {
+      position: fixed;
+      z-index: 10000;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: $app-header-height;
       margin: 0 auto;
+      padding-top: 6px;
+      color: $color-charcoal;
+      background-color: $color-white;
+      border-bottom: 1px solid $color-gray-border;
 
-      @media (min-width: 500px) {
-        width: 500px;
-      }
+      h1 {
+        font-size: 24px;
+        color: $color-crimson;
 
-      @media (min-width: 768px) {
-        width: 768px;
-      }
-
-      @media (min-width: 1024px) {
-        width: 1024px;
-      }
-
-      div.toolbar {
-        position: absolute;
-        top: 16px;
-        right: 0;
-        font-size: 1.25em;
-
-        color: $color-white;
+        @media screen {
+          margin: 0 0 0 $app-aside-width + 20px;
+        }
 
         a {
-          color: $color-white;
+          color: $color-crimson;
+
+          &:hover {
+            letter-spacing: 1px;
+          }
+        }
+      }
+
+      div.user-toolbar {
+        position: absolute;
+        top: 4px;
+        right: 18px;
+        text-align: right;
+
+        i.fa {
+          font-size: 38px;
+          color: $color-blue;
+          -webkit-transition: 0.25s ease-in-out;
+          -moz-transition: 0.25s ease-in-out;
+
+          &:hover {
+            color: darken($color-blue, 10%);
+          }
+        }
+
+        a {
+          color: $color-blue;
+        }
+
+        ul {
+          list-style: none;
         }
       }
 
@@ -85,20 +133,110 @@ body.app {
     }
   }
 
+  aside.app-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+
+    @media print {
+      display: none;
+    }
+
+    width: $app-aside-width;
+    height: 100%;
+    overflow: hidden;
+    background-color: $color-charcoal;
+
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+
+    &:hover {
+      width: $app-aside-width-hover;
+    }
+
+    div.logo {
+      width:  80%;
+      height: 80px;
+      margin: 18px auto;
+
+      svg {
+        width: 100%;
+        max-width: 100px;
+        max-height: 70px;
+        fill: blue;
+
+        .crimson {
+          fill: $color-crimson;
+        }
+      }
+    }
+
+    ul {
+      li {
+        a {
+          display: block;
+          position: relative;
+          margin: 10px 0;
+          padding: 9px;
+          color: $color-white;
+
+          &.active {
+            background-color: $color-blue;
+          }
+
+          &:hover {
+            background-color: lighten($color-charcoal, 10%);
+          }
+
+          span.label {
+            display: block;
+            position: absolute;
+            top: 16px;
+            left: 60px;
+          }
+        }
+      }
+    }
+  }
+
   div.app-action {
+    position: absolute;
+    top: $app-header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @media screen {
+      left: $app-aside-width;
+    }
+
     margin: 0 auto;
-    width: 100%;
+    box-sizing: border-box;
 
-    @media (min-width: 500px) {
-      width: 500px;
+    &.responsive {
+      @media (min-width: 500px) {
+        width: 500px - $app-aside-width;
+      }
+
+      @media (min-width: 768px) {
+        width: 768px - $app-aside-width;
+      }
+
+      @media (min-width: 1024px) {
+        width: 1024px - $app-aside-width;
+      }
     }
+  }
 
-    @media (min-width: 768px) {
-      width: 768px;
-    }
+  .jq-dropdown {
+    a {
+      color: $color-blue;
+      padding: 9px 18px;
 
-    @media (min-width: 1024px) {
-      width: 1024px;
+      i.fa {
+        display: inline-block;
+        margin-right: 5px;
+      }
     }
   }
 }

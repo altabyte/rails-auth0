@@ -72,6 +72,10 @@ module FontAwesome
     create_tag 'fa-user-plus', classes
   end
 
+  def fa_user_secret(classes: [])
+    create_tag 'fa-user-secret', classes
+  end
+
   def fa_user_times(classes: [])
     create_tag 'fa-user-times', classes
   end

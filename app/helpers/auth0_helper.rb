@@ -28,7 +28,7 @@ module Auth0Helper
     if API_VERSION == 1
       creds.merge(client_secret: Rails.application.secrets.auth0_client_secret)
     elsif API_VERSION == 2
-      creds.merge(token: auth0_jwt)
+      creds.merge(token: auth0_id_token)
     end
   end
 

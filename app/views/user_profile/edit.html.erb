@@ -1,0 +1,32 @@
+<%= form_tag(user_profile_path, method: :patch, class: 'simple-form') do %>
+    <h1>User Profile</h1>
+
+    <%= content_tag :div do %>
+        <% concat label_tag 'id', 'User ID' %>
+        <% concat text_field_tag 'user[id]', current_user_id, placeholder: 'Example: Jamie Smith', disabled: true %>
+    <% end -%>
+
+    <%= content_tag :div do %>
+        <% concat label_tag 'name', 'Your name' %>
+        <% concat text_field_tag 'user[name]', current_user_name, placeholder: 'Example: Jamie Smith' %>
+    <% end -%>
+
+    <%= content_tag :div do %>
+        <%= label_tag 'email', 'Your name' %>
+        <%= text_field_tag 'user[email]', current_user_email, placeholder: 'Example: user@example.com' %>
+    <% end -%>
+
+    <div class="profile-picture">
+      <label>Profile picture</label>
+      <%= image_tag @user[:info][:image] %>
+    </div>
+
+    <%= content_tag :div do %>
+        <% concat label_tag 'session_expires_at', 'Session expires' %>
+        <% concat text_field_tag 'user[session_expires_at]',
+                                 current_user_session_expires_at.strftime('%A %I:%M %p'),
+                                 placeholder: 'Session expiry time', disabled: true %>
+    <% end -%>
+
+    <%= submit_tag 'Save' %>
+<% end -%>

@@ -1,0 +1,46 @@
+@import 'base';
+
+#user-profile {
+  #edit {
+    .simple_form, .simple-form {
+      width: 500px;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 35px;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 25px;
+      width: 120px;
+      font-weight: normal;
+    }
+
+    input {
+      width: 250px;
+
+      &:disabled {
+        font-style: italic;
+      }
+    }
+
+    div.profile-picture {
+      vertical-align: top;
+
+      label {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      img {
+        display: inline-block;
+        vertical-align: top;
+        width: 100px;
+        padding-top: 20px;
+      }
+    }
+  }
+}

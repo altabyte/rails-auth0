@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   match '/auth/auth0/callback', via: :get, to: 'auth0#callback'
   match '/auth/failure', via: :get, to: 'auth0#failure'
+  match '/user/profile', via: :get, to: 'user_profile#edit'
+  match '/user/profile', via: %i[patch post], to: 'user_profile#update'
   match '/login', via: :get, to: 'auth0#login', as: :login
   match '/logout', via: :delete, to: 'auth0#logout', as: :logout
 

@@ -11,9 +11,11 @@
       svg.company-logo {
         transition: 0.5s;
         width: 275px;
+        height: 275px;
 
         &:hover {
           width: 300px;
+          height: 305px;
         }
 
         .st0 {

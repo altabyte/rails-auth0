@@ -30,6 +30,7 @@
 <div id="application-background"></div>
 <header>
   <section class="header">
+    <%= link_to fa_bars, 'javascript:;', class: 'app-aside-trigger' %>
     <h1><%= link_to t('application_name'), dashboard_path %></h1>
     <div class="user-toolbar">
       <%# http://labs.abeautifulsite.net/jquery-dropdown/ -%>

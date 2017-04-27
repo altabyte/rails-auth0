@@ -35,6 +35,34 @@ $(document).on('turbolinks:load', function () {
     }
 
 
+    $('header a.app-aside-trigger').click(function() {
+        $('aside.app-nav').addClass('with-overlay');
+
+        if ($('#app-aside-overlay').length == 0) {
+            $('body').prepend("<div id='app-aside-overlay'></div>");
+
+            var overlayHeight = Math.max($(document).height(), $(document).width()); /* Allow for mobile device rotation. */
+            $("#app-aside-overlay")
+                .height(overlayHeight)
+                .css({
+                    'opacity': 0.15,
+                    'position': 'fixed',
+                    'top': 0,
+                    'left': 0,
+                    'background-color': '#000000',
+                    'width': '100%',
+                    'z-index': 100000,
+                    '-webkit-transition': '0.25s ease-in-out',
+                    '-moz-transition': '0.25s ease-in-out'
+                });
+        }
+    });
+    $(document.body).on('click', '#app-aside-overlay, aside.app-nav.with-overlay, aside.app-nav.with-overlay a', function() {
+        $('aside.app-nav').removeClass('with-overlay');
+        $('#app-aside-overlay').remove();
+    });
+
+
     $('.toggle-next-element').click(function (event) {
         $(this).next().toggle("slow");
         $(this).find(".fa.more").toggle();

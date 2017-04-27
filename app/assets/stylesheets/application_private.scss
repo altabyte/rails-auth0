@@ -69,17 +69,38 @@ body.app {
       width: 100%;
       height: $app-header-height;
       margin: 0 auto;
-      padding-top: 6px;
       color: $color-charcoal;
       background-color: $color-white;
       border-bottom: 1px solid $color-gray-border;
 
+      a.app-aside-trigger {
+        display: block;
+        position: absolute;
+        top: 8px;
+        left: 5px;
+        padding: 0 10px;
+        font-size: 24px;
+        color: lighten($color-charcoal, 40%);
+
+        @media screen and (min-width: $app-aside-transition-compact) {
+          display: none;
+        }
+      }
+
       h1 {
+        display: inline-block;
         font-size: 24px;
         color: $color-crimson;
+        margin: 0;
+        position: absolute;
+        top: 8px;
+        left: 50px;
 
-        @media screen {
-          margin: 0 0 0 $app-aside-width + 20px;
+        @media screen and (min-width: $app-aside-transition-compact) {
+          left: $app-aside-width-compact + 15px;
+        }
+        @media screen and (min-width: $app-aside-transition-full) {
+          left: $app-aside-width + 15px;
         }
 
         a {
@@ -137,13 +158,24 @@ body.app {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10001;
+    z-index: 100001;
 
     @media print {
       display: none;
     }
 
-    width: $app-aside-width;
+    width: 0;
+    @media (min-width: $app-aside-transition-compact) {
+      width: $app-aside-width-compact;
+    }
+    @media (min-width: $app-aside-transition-full) {
+      width: $app-aside-width;
+    }
+
+    &.with-overlay {
+      width: $app-aside-width;
+    }
+
     height: 100%;
     overflow: hidden;
     background-color: $color-charcoal;
@@ -152,7 +184,7 @@ body.app {
     -moz-transition: 0.25s ease-in-out;
 
     &:hover {
-      width: $app-aside-width-hover;
+      width: $app-aside-width;
     }
 
     div.logo {
@@ -206,7 +238,10 @@ body.app {
     bottom: 0;
     left: 0;
     right: 0;
-    @media screen {
+    @media screen and (min-width: $app-aside-transition-compact) {
+      left: $app-aside-width-compact;
+    }
+    @media screen and (min-width: $app-aside-transition-full) {
       left: $app-aside-width;
     }
 

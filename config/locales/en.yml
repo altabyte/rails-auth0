@@ -20,5 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  application_name: "Ruby Auth0"
+  application_name: 'Ruby Auth0'
+  company_name: 'altabyte'
+  login: 'Login'
+  logout: 'Logout'
+
+  public_pages:
+    index:
+      h1: 'Company Home Page'
+    shared:
+      link_to_dashboard: 'My Dashboard'
+
+  app_layout:
+    aside_nav:
+      dashboard: 'Dashboard'
+      content: 'Content'
+      restricted: 'Restricted Pages'
+      super_admin: 'Super Admin'

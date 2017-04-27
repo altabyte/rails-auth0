@@ -2,10 +2,11 @@
   <%= inline_svg('company-logo.svg', title: 'Home', nocomment: true, class: 'company-logo') %>
 </div>
 
-<h1>Company Home Page</h1>
+<h1><%= t 'public_pages.index.h1' %></h1>
+
 
 <% if authenticated? -%>
-    <%= link_to 'My dashboard ', dashboard_path, class: 'dashboard' %>
+    <%= link_to t('public_pages.shared.link_to_dashboard'), dashboard_path, class: 'dashboard' %>
 <% else -%>
-    <a class="login" onclick="signin()">Login</a>
+    <a class="login" onclick="signin()"><%= t 'login' %></a>
 <% end -%>

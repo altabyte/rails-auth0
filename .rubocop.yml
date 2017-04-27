@@ -28,10 +28,15 @@ Documentation:
 Metrics/BlockLength:
   ExcludedMethods:
     - configure
+    - context
+    - describe
 
 # Extend the maximum line length to 120 characters.
 Metrics/LineLength:
   Max: 120
+  Exclude:
+    - spec/**
+    - spec/**/**
 
 Security/MarshalLoad:
   Exclude:

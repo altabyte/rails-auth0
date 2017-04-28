@@ -25,8 +25,8 @@ gem 'routing-filter'                                    # https://github.com/sve
 # Authorization
 gem 'auth0'                                             # Auth0 Ruby SDK
 gem 'jwt'
-gem 'omniauth',                                         '~> 1.3.2'
-gem 'omniauth-auth0',                                   '~> 1.4.2'
+gem 'omniauth',                                         '~> 1.6'
+gem 'omniauth-auth0',                                   '~> 2.0'
 
 gem 'font-awesome-rails'                                # https://github.com/bokmann/font-awesome-rails
 gem 'gon'                                               # https://github.com/gazay/gon

@@ -19,6 +19,7 @@
   <meta name="theme-color" content="#ffffff">
 
   <%= csrf_meta_tags %>
+  <%= state_meta_tag %> <%# Cross site scripting meta tag for Auth0 Lock widget. %>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

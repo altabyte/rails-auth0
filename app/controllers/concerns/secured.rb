@@ -5,6 +5,7 @@ module Secured
   extend ActiveSupport::Concern
 
   included do
+    include Pundit
     before_action :logged_in_using_omniauth?
   end
 

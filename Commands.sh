@@ -27,3 +27,5 @@ rails new rails-auth0 -T --database=postgresql
 ./bin/rails g controller auth0 callback failure --skip-template-engine --skip-assets
 
 ./bin/rails g controller UserProfile edit
+
+./bin/rails g pundit:install

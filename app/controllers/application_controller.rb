@@ -1,6 +1,8 @@
 # ApplicationController
 #
 class ApplicationController < ActionController::Base
+  include Auth0Helper if defined? Auth0
+
   protect_from_forgery with: :exception
 
   force_ssl if: :ssl_configured?
@@ -21,10 +23,6 @@ class ApplicationController < ActionController::Base
   #
   def session_timestamp!
     session['updated_at'] = Time.now.utc.to_i
-  end
-
-  def auth0_id_token
-    session[:userinfo]&.fetch('credentials')&.fetch('id_token')
   end
 
   def set_locale

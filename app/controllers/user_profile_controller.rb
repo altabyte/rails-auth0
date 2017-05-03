@@ -6,7 +6,7 @@ class UserProfileController < ApplicationController
   include Secured
 
   def edit
-    @user = session[:userinfo]
+    @user = current_user
   end
 
   def update
@@ -18,14 +18,6 @@ class UserProfileController < ApplicationController
 
   #---------------------------------------------------------------------------
   private
-
-  def current_user_id
-    session[:userinfo].fetch(:uid, nil)
-  end
-
-  def current_user_email
-    session[:userinfo].fetch(:info, {}).fetch(:email, nil)
-  end
 
   def auth0_api
     return @auth0_api if @auth0_api

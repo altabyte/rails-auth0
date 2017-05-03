@@ -5,7 +5,6 @@ module Secured
   extend ActiveSupport::Concern
 
   included do
-    include Pundit
     before_action :authenticate_user!
   end
 

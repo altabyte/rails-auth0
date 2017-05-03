@@ -2,6 +2,7 @@
 #
 class ApplicationController < ActionController::Base
   include Auth0Helper if defined? Auth0
+  include Pundit
 
   protect_from_forgery with: :exception
 
@@ -9,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   after_action  :session_timestamp!
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   helper_method :auth0_id_token
 
@@ -28,5 +31,10 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
     gon.locale = I18n.locale if defined? Gon
+  end
+
+  def user_not_authorized
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_to(request.referrer || login_path)
   end
 end

@@ -76,10 +76,12 @@
       <% link = "#{fa_key(classes: 'fa-fw fa-2x')} #{content_tag :span, t('app_layout.aside_nav.restricted'), class: 'label'}".html_safe %>
       <%= link_to(link, 'javascript:;', class: '') %>
     </li>
-    <li>
-      <% link = "#{fa_user_secret(classes: 'fa-fw fa-2x')} #{content_tag :span, t('app_layout.aside_nav.super_admin'), class: 'label'}".html_safe %>
-      <%= link_to(link, 'javascript:;', class: '') %>
-    </li>
+    <% if policy(:dashboard).super_admin? -%>
+      <li>
+        <% link = "#{fa_user_secret(classes: 'fa-fw fa-2x')} #{content_tag :span, t('app_layout.aside_nav.super_admin'), class: 'label'}".html_safe %>
+        <%= link_to(link, super_admin_path, class: '') %>
+      </li>
+    <% end -%>
   </ul>
 </aside>
 

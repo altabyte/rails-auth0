@@ -29,3 +29,4 @@ rails new rails-auth0 -T --database=postgresql
 ./bin/rails g controller UserProfile edit
 
 ./bin/rails g pundit:install
+./bin/rails g pundit:policy dashboard

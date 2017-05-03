@@ -6,6 +6,7 @@ class UserProfileController < ApplicationController
   include Secured
 
   def edit
+    skip_authorization
     @user = current_user
   end
 

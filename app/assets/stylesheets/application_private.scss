@@ -60,6 +60,14 @@ body.app {
     border-bottom: 1px solid darken($color-background-blue, 6%);
     margin-bottom: 18px;
     width: 100%;
+    height: $app-header-height;
+    overflow: hidden;
+
+    #flash {
+      position: relative;
+      z-index: 200000;
+      margin-top: 8px;
+    }
 
     section.header {
       position: fixed;

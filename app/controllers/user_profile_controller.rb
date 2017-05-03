@@ -5,8 +5,16 @@ require 'auth0/api_management_access_token'
 class UserProfileController < ApplicationController
   include Secured
 
+  before_action :skip_authorization, only: %i[edit update]
+
+  rescue_from Auth0::BadRequest do |exception|
+    info = JSON.parse(exception.message)
+    puts info['error']
+    puts info['message']
+    redirect_to user_profile_path, alert: info['error']
+  end
+
   def edit
-    skip_authorization
     @user = current_user
   end
 

@@ -81,7 +81,6 @@ module Auth0Helper
   #
   def current_user_id
     uid = session.fetch(:userinfo, {}).fetch(:uid, nil)
-    uid = uid.split('|').last if uid.match?(/^auth0|/i)
     uid
   end
 

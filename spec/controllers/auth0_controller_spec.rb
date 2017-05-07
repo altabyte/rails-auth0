@@ -6,7 +6,6 @@ RSpec.describe Auth0Controller, type: :controller do
 
   describe 'GET #callback' do
     before do
-
       assign_request_env_for_auth0
     end
 

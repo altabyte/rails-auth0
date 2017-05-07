@@ -7,13 +7,8 @@ DashboardPolicy = Struct.new(:user, :dashboard) do
   end
 
   def super_admin?
-    app_metadata.fetch('super_admin', false)
-  end
-
-  #---------------------------------------------------------------------------
-  private
-
-  def app_metadata
-    user.fetch(:extra, {}).fetch(:raw_info, {}).fetch(:app_metadata, {})
+    user.app_metadata.fetch('super_admin', false).to_s.downcase.in? %w[true yes 1]
+  rescue
+    false
   end
 end

@@ -5,7 +5,7 @@
 <h1><%= t 'public_pages.index.h1' %></h1>
 
 
-<% if authenticated? -%>
+<% if user_signed_in? -%>
     <%= link_to t('public_pages.shared.link_to_dashboard'), dashboard_path, class: 'dashboard' %>
 <% else -%>
     <a class="login" onclick="signin()"><%= t 'login' %></a>

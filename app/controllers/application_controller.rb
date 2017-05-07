@@ -1,8 +1,13 @@
+require 'auth0/devise_methods'
+
 # ApplicationController
 #
 class ApplicationController < ActionController::Base
+  include Auth0::DeviseMethods if defined? Auth0
   include Auth0Helper if defined? Auth0
   include Pundit
+
+  helper_method :user_signed_in?, :current_user, :auth0_claims, :auth0_id_token if defined? Auth0
 
   protect_from_forgery with: :exception
 
@@ -12,8 +17,6 @@ class ApplicationController < ActionController::Base
   after_action  :session_timestamp!
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
-  helper_method :auth0_id_token
 
   #---------------------------------------------------------------------------
   private

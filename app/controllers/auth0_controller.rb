@@ -41,6 +41,6 @@ class Auth0Controller < ApplicationController
 
   def set_session_userinfo
     session[:userinfo] = request.env['omniauth.auth']
-    puts request.env['omniauth.auth'].to_yaml
+    puts request.env['omniauth.auth'].to_yaml if Rails.env.development? || Rails.env.test?
   end
 end

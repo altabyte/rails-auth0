@@ -43,7 +43,7 @@
     </div>
 
     <div class="auth">
-      <% unless authenticated? -%>
+      <% unless user_signed_in? -%>
           <script>
               <%# Customization options:  https://github.com/auth0/lock -%>
               var auth0LockOptions = {

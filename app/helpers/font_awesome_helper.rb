@@ -1,4 +1,4 @@
-module FontAwesome
+module FontAwesomeHelper
 
   def fa_arrow_down(classes: [])
     create_tag 'fa-caret-down', classes

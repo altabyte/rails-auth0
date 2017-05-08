@@ -1,8 +1,10 @@
-require_relative 'font_awesome'
+require_relative 'font_awesome_helper'
+require_relative 'redcarpet_helper'
 
 module ApplicationHelper
 
-  include FontAwesome
+  include FontAwesomeHelper
+  include RedcarpetHelper
 
   # Create a session state and meta tag to be used as a cross-site-scripting token for Auth0 Lock widget.
   # Example:

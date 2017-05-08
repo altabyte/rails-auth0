@@ -88,6 +88,9 @@ Use the following command to generate a new secret key:
 ./bin/rails secret 
 ``` 
 
+### RAILS_MASTER_KEY
+The encryption key `config/secrets.yml.enc`
+
 ### FORCE_SSL
 A boolean switch to determine if SSL connections should be forced. When active this 
 will redirect `http://` requests to `https://`.
@@ -183,3 +186,5 @@ to something more relevant in [config/application.rb](config/application.rb).
 
 You will also need to change the database connection parameters in [config/database.yml](config/database.yml)
 or set them using environmental variables.
+
+Set the ActionCable channel prefixes in [config/cable.yml](config/cable.yml) to match your application name.

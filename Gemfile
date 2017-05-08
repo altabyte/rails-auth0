@@ -36,7 +36,6 @@ gem 'redcarpet'                                         # https://github.com/vmg
 # gem 'simple_form'                                     # https://github.com/plataformatec/simple_form
 
 # Javascript
-gem 'coffee-rails',                                     '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks',                                       '~> 5'
 gem 'uglifier',                                         '>= 3.2'
@@ -56,7 +55,7 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   # FactoryGirlRails must be in test AND development groups to ensure
   #   `./bin/rails g factory_girl:model ModelName`
@@ -68,12 +67,16 @@ group :development, :test do
   gem 'rspec-rails',                                    '~>  3.6.0'
   gem 'rspec-collection_matchers'                       # https://github.com/rspec/rspec-collection_matchers
   gem 'rspec-retry'
+
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara',                                       '~> 2.13'
+  gem 'selenium-webdriver'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console',                                    '>= 3.5.0'
-  gem 'listen',                                         '>= 3.1'
+  gem 'listen',                                         '>= 3.1', '< 3.2'
 
   # Spring speeds up development by keeping your application running in the background.
   # Read more: https://github.com/rails/spring

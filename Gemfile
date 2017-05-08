@@ -39,7 +39,7 @@ gem 'redcarpet'                                         # https://github.com/vmg
 gem 'coffee-rails',                                     '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks',                                       '~> 5'
-gem 'uglifier',                                         '>= 3.0'
+gem 'uglifier',                                         '>= 3.2'
 
 # Rails Assets is the frictionless proxy between Bundler and Bower.
 # https://rails-assets.org/#/
@@ -65,7 +65,7 @@ group :development, :test do
 
   gem 'climate_control'                                 # https://github.com/thoughtbot/climate_control
   gem 'faker'
-  gem 'rspec-rails',                                    '~>  3.5.0'
+  gem 'rspec-rails',                                    '~>  3.6.0'
   gem 'rspec-collection_matchers'                       # https://github.com/rspec/rspec-collection_matchers
   gem 'rspec-retry'
 end
@@ -73,12 +73,12 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console',                                    '>= 3.5.0'
-  gem 'listen',                                         '~> 3.1'
+  gem 'listen',                                         '>= 3.1'
 
   # Spring speeds up development by keeping your application running in the background.
   # Read more: https://github.com/rails/spring
-  gem 'spring',                                         '~> 2.0.0'
-  gem 'spring-watcher-listen',                          '~> 2.0.0'
+  gem 'spring',                                         '~> 2.0'
+  gem 'spring-watcher-listen',                          '~> 2.0'
 
   gem 'brakeman',       require: false
   gem 'rubocop',        require: false
@@ -88,7 +88,7 @@ group :development do
 end
 
 group :test do
-  gem 'database_cleaner',                               '~> 1.5'
+  gem 'database_cleaner',                               '~> 1.6'
   gem 'shoulda-matchers',                               '~> 3.1'
   # gem 'cucumber-rails', require: false
   # gem 'selenium-webdriver'   # run Cucumber scenarios which use Javascript

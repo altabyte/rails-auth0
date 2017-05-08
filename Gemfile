@@ -32,7 +32,9 @@ gem 'omniauth-auth0',                                   '~> 2.0'
 gem 'font-awesome-rails'                                # https://github.com/bokmann/font-awesome-rails
 gem 'gon'                                               # https://github.com/gazay/gon
 gem 'inline_svg'                                        # https://github.com/jamesmartin/inline_svg
+gem 'oj'
 gem 'redcarpet'                                         # https://github.com/vmg/redcarpet
+gem 'rollbar'
 # gem 'simple_form'                                     # https://github.com/plataformatec/simple_form
 
 # Javascript

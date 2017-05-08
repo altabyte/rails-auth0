@@ -1,14 +1,9 @@
 require 'rails_helper'
+require 'shared/redirect_not_authenticated'
 
 RSpec.describe DashboardController, type: :controller do
 
-  context 'Not authenticated' do
-    it 'returns http success' do
-      get :index
-      expect(response).to redirect_to login_path
-    end
-  end
-
+  include_context 'redirect index not authenticated'
 
   describe 'GET #index' do
     before { assign_session_for_auth0 }

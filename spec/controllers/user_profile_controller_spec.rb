@@ -1,14 +1,9 @@
 require 'rails_helper'
+require 'shared/redirect_not_authenticated'
 
 RSpec.describe UserProfileController, type: :controller do
 
-  context 'Not authenticated' do
-    it 'returns http success' do
-      get :edit
-      expect(response).to redirect_to login_path
-    end
-  end
-
+  include_context 'redirect edit not authenticated'
 
   describe 'GET #edit' do
     before { assign_session_for_auth0 }

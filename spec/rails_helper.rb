@@ -70,7 +70,8 @@ ActiveRecord::Migration.maintain_test_schema!
 # missing parameters in the test environment.
 #
 # Routing tests can/should re-enable RoutingFilter since the whole routing stack gets executed for these testcases.
-RoutingFilter.active = true
+# TODO: routing-filter gem does not currently support Rails 5.1
+# RoutingFilter.active = true
 
 RSpec.configure do |config|
 

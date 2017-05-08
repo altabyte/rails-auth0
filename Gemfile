@@ -10,7 +10,7 @@ end
 # Must be before other gems that rely on environmental variables!
 gem 'dotenv-rails', groups: %i[development test]
 
-gem 'rails',                                            '~> 5.0.2'
+gem 'rails',                                            '5.1'
 gem 'puma',                                             '~> 3.8'
 gem 'pg', '~> 0.20',                                    platform: :ruby
 gem 'activerecord-jdbcpostgresql-adapter',              platform: :jruby
@@ -19,8 +19,8 @@ gem 'redis',                                            '~> 3.3.3'
 gem 'redis-namespace',                                  '~> 1.5.3'
 gem 'redis-rails',                                      '~> 5.0.2'
 
-#
-gem 'routing-filter'                                    # https://github.com/svenfuchs/routing-filter
+# TODO: routing-filter gem does not currently support Rails 5.1
+# gem 'routing-filter'                                  # https://github.com/svenfuchs/routing-filter
 
 # Authorization
 gem 'auth0'                                             # Auth0 Ruby SDK

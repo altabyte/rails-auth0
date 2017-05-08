@@ -1,5 +1,7 @@
+# TODO: Set channel prefixes to application name.
 development:
   adapter: async
+  channel_prefix: rails_app_dev
 
 test:
   adapter: async
@@ -7,7 +9,9 @@ test:
 production:
   adapter: redis
   url: redis://localhost:6379/1
+  channel_prefix: rails_app_production
 
 staging:
   adapter: redis
   url: redis://localhost:6379/2
+  channel_prefix: rails_app_staging

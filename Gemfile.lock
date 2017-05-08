@@ -317,7 +317,7 @@ DEPENDENCIES
   pg (~> 0.20)
   puma (~> 3.8)
   pundit
-  rails (= 5.1)
+  rails (~> 5.1.0)
   rails_12factor
   redcarpet
   redis (~> 3.3.3)

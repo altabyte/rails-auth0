@@ -1,0 +1,9 @@
+<%= tag.h1 'Accounts' %>
+
+<ul>
+  <% @accounts.each do |account| %>
+    <%= tag.li do %>
+      <% concat link_to account.name, edit_account_path(account) %>
+      <% end -%>
+  <% end -%>
+</ul>

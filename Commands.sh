@@ -34,3 +34,4 @@ rails new rails-auth0 -T --database=postgresql
 ./bin/rails generate rollbar
 
 ./bin/rails g resource Account name:string
+./bin/rails g pundit:policy account

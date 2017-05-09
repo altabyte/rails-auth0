@@ -76,7 +76,8 @@ CREATE TABLE accounts (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    name character varying NOT NULL
+    name character varying NOT NULL,
+    settings jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 

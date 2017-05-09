@@ -4,6 +4,7 @@ class CreateAccounts < ActiveRecord::Migration[5.1]
       t.timestamps
 
       t.string :name,           null: false
+      t.jsonb :settings,        null: false, default: {}
     end
 
     add_index :accounts, :name, unique: true

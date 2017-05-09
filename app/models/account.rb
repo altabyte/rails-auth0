@@ -1,6 +1,8 @@
 # Account model.
 #
 class Account < ApplicationRecord
+  store_accessor :settings, :theme
+
   validates :name, presence: true, uniqueness: true
 
   def name=(name)

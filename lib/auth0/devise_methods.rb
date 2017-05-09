@@ -71,8 +71,8 @@ module Auth0
       user.email          = auth0_claims[:email]
       user.email_verified = auth0_claims[:email_verified]
       user.picture        = auth0_claims[:picture]
-      user.user_metadata  = auth0_claims[:user_metadata] || {}
-      user.app_metadata   = auth0_claims[:app_metadata]  || {}
+      user.user_metadata  = (auth0_claims[:user_metadata] || {}).with_indifferent_access
+      user.app_metadata   = (auth0_claims[:app_metadata]  || {}).with_indifferent_access
       user.exp            = auth0_claims[:exp]
       user.iat            = auth0_claims[:iat]
       user.iss            = auth0_claims[:iss]

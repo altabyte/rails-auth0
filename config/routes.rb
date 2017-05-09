@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   match '/dashboard', via: :get, to: 'dashboard#index', as: :dashboard
   match '/super-admin', via: :get, to: 'dashboard#super_admin', as: :super_admin
 
+  resources :accounts
+
   root 'public_pages#home'
 end
 

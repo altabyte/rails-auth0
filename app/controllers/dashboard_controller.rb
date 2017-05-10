@@ -5,7 +5,9 @@ class DashboardController < ApplicationController
 
   before_action { authorize :dashboard }
 
-  def index; end
+  def index
+    skip_policy_scope
+  end
 
   def super_admin; end
 end

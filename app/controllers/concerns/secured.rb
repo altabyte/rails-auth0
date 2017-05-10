@@ -7,7 +7,8 @@ module Secured
 
   included do
     before_action :authenticate_user!
-    after_action :verify_authorized
+    after_action :verify_authorized if Rails.env.development?
+    after_action :verify_policy_scoped, except: %i[new create show edit update destroy] if Rails.env.development?
   end
 
 end

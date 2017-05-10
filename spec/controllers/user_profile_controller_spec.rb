@@ -1,17 +1,25 @@
 require 'rails_helper'
-require 'shared/redirect_not_authenticated'
+require 'support/user_not_signed_in_contexts'
 
 RSpec.describe UserProfileController, type: :controller do
 
-  include_context 'redirect edit not authenticated'
-
   describe 'GET #edit' do
-    before { assign_session_for_auth0 }
 
-    it 'returns http success' do
-      get :edit
-      expect(response).to have_http_status(:success)
+    context 'not signed in' do
+      before { get :edit }
+      include_context 'user not signed in'
+    end
+
+    context 'user signed in' do
+
+      before do
+        assign_session_for_auth0
+        get :edit
+      end
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
-
 end

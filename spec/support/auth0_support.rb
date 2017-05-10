@@ -19,9 +19,9 @@ module Auth0RequestSpecHelper
     user.email          = params.fetch(:email,          Faker::Internet.email)
     user.email_verified = params.fetch(:email_verified, true)
     user.picture        = params.fetch(:avatar,         nil)
-    user.user_metadata  = params.fetch(:user_metadata,  {})
-    user.app_metadata   = params.fetch(:app_metadata,   {})
-    user.iss            = params.fetch(:issuer,         'https://example.auth0.com/')
+    user.user_metadata  = params.fetch(:user_metadata,  {}).with_indifferent_access
+    user.app_metadata   = params.fetch(:app_metadata,   {}).with_indifferent_access
+    user.iss            = params.fetch(:issuer,         ENV.fetch('AUTH0_DOMAIN', 'https://example.auth0.com/'))
     user.aud            = params.fetch(:client_id,      SecureRandom.hex(32))
     user.iat            = params.fetch(:issued_at,      Time.now.utc - 1.minute).to_i
     user.exp            = params.fetch(:expires_at,     Time.now.utc + 10.minutes).to_i

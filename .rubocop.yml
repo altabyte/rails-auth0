@@ -11,6 +11,7 @@ AllCops:
   Exclude:
     - spec/support/auth0_support.rb
     - vendor/**/*
+    - db/migrate/**
 
 # Include: **/Gemfile, **/gems.rb
 Bundler/OrderedGems:

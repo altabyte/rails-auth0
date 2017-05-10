@@ -39,8 +39,11 @@
       <% content_for :jq_dropdown do # Render at bottom of body. -%>
           <div id="jq-user-profile-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right">
             <ul class="jq-dropdown-menu">
-              <li><%= link_to "#{fa_pencil(classes: 'fa-fw')} Profile".html_safe, user_profile_path %></li>
-              <li><%= link_to "#{fa_sliders(classes: 'fa-fw')} Settings".html_safe, user_profile_path %></li>
+              <li><%= link_to "#{fa_pencil(classes: 'fa-fw')} My Profile".html_safe, user_profile_path %></li>
+              <% account_id = current_user.app_metadata.fetch('account_ids', []).first -%>
+              <% if account_id && policy(Account.new(id: account_id)).edit? -%>
+                <li><%= link_to "#{fa_sliders(classes: 'fa-fw')} Account Settings".html_safe, edit_account_path(account_id) %></li>
+              <% end -%>
               <li><%= link_to "#{fa_sign_out(classes: 'fa-fw')} #{t 'logout'}".html_safe, logout_path, method: :delete %></li>
             </ul>
           </div>

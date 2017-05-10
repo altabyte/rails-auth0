@@ -1,0 +1,10 @@
+<%= form_with model: @account, html: { class: 'simple-form' } do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: 'Account name', id: :account_name %>
+    <br>
+    <%= form.submit %>
+<% end -%>
+
+<p>
+  <%= link_to "#{fa_arrow_left}&nbsp; Back".html_safe, policy(Account).index? ? accounts_path : dashboard_path %>
+</p>

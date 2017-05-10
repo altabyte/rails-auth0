@@ -5,6 +5,8 @@ class AccountsController < ApplicationController
 
   before_action :set_account, only: %i[show edit update destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :account_not_found
+
   def index
     authorize Account
     @accounts = policy_scope(Account)
@@ -20,13 +22,13 @@ class AccountsController < ApplicationController
   end
 
   def edit
-    authorize @account
+    authorize @account if @account
   end
 
   def update
     authorize @account
     respond_to do |format|
-      if @account.update(account_params)
+      if @account.update(permitted_attributes(@account))
         format.html { redirect_to @account, notice: 'Account updated.' }
         format.json { head :no_content }
       else
@@ -41,9 +43,10 @@ class AccountsController < ApplicationController
 
   def set_account
     @account = Account.where(id: params[:id]).first
+    raise ActiveRecord::RecordNotFound, 'Account not found' unless @account
   end
 
-  def account_params
-    params.require(:account).permit(:name, :theme)
+  def account_not_found
+    redirect_to dashboard_path, alert: 'Account not found'
   end
 end

@@ -43,8 +43,16 @@ class AccountPolicy < ApplicationPolicy
     super_admin?
   end
 
+  def permitted_attributes
+    if super_admin?
+      %i[name theme code]
+    else
+      %i[name theme]
+    end
+  end
+
   def user_belongs_to_account?
-    id =  account.is_a?(Account) ? account.id.to_s : account.to_s
+    id = account.is_a?(Account) ? account.id.to_s : account.to_s
     id.in?(account_ids)
   end
 

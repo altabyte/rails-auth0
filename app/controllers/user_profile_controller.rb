@@ -19,9 +19,11 @@ class UserProfileController < ApplicationController
   end
 
   def update
+    changes = []
     info = auth0_api.patch_user(current_user.auth0_id, user_params)
-    update_user_email(info['email'])
-    update_user_name(info['user_metadata']['name'])
+    changes << :email unless current_user.email == info.fetch('email', nil)
+    changes << :name  unless current_user.name  == info.fetch('user_metadata', {}).fetch('name', nil)
+    session.delete(:userinfo) if changes.any?
     redirect_to dashboard_path, notice: 'User profile updated'
   end
 
@@ -48,16 +50,5 @@ class UserProfileController < ApplicationController
     {
       name: params[:user][:name]
     }
-  end
-
-  # @TODO Store new email locally for the duration of the session.
-  def update_user_email(email)
-    # session[:userinfo][:info][:email] = email
-    # session[:userinfo][:extra][:raw_info][:email] = email
-  end
-
-  # @TODO Store new name locally for the duration of the session.
-  def update_user_name(name)
-    # session[:userinfo][:extra][:raw_info][:user_metadata][:name] = name
   end
 end

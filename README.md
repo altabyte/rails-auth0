@@ -1,7 +1,8 @@
 # My Rails 5 base app
 
-This is a bare-bones Rails 5 [PostgreSQL](https://www.postgresql.org/) application with authentication
-handled by [Auth0](https://auth0.com/). I generally fork this repo when starting a new web application.
+This is a bare-bones Rails 5.1 [PostgreSQL](https://www.postgresql.org/) application with authentication
+handled by [Auth0](https://auth0.com/) and authorization by [Pundit](https://github.com/elabs/pundit).
+I generally clone this repo when starting a new web application.
 
 This application uses [Redis](https://redis.io/) for the [session store](config/initializers/session_store.rb).
 My preferred redis hosting is [Redis Cloud](https://redislabs.com/), which is available as a
@@ -147,6 +148,8 @@ The callback URL to be called after a user has logged in or signed up. For devel
 Source code consistency is checked by [Rubocop](http://batsov.com/rubocop/).
 RuboCop is a Ruby code style checker based on the community-driven
 [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).
+The default [Rubocop styles](https://github.com/bbatsov/rubocop/blob/master/config/default.yml)
+are mostly adhered to, with some minor customizations defined in [.rubocop.yml](.rubocop.yml).
 
 A Rubocop check is executed by [GitLab CI](https://about.gitlab.com/gitlab-ci/) before each build.
 
@@ -176,8 +179,18 @@ Run [Brakeman](http://brakemanscanner.org/) before each deploy with the followin
 ```shell
 ./bin/brakeman
 ```
+
 Brakeman is an open source vulnerability scanner specifically designed for Ruby on Rails applications.
 It statically analyzes Rails application code to find security issues at any stage of development.
+
+The integrity of all gem dependencies can be validated using [bundler-audit](https://github.com/rubysec/bundler-audit)
+using the following command.
+
+```shell
+./bin/bundle-audit check --update
+```
+
+This will flag any know vulnerabilities. Use `--ignore <code>` to ignore specific advisories.
 
 ## Re-branding
 

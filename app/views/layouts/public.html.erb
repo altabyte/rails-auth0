@@ -32,7 +32,7 @@
 
 <header>
   <header>
-    <div id="flash">
+    <div id="flash" data-timeout="5000" data-fadeout="1500">
       <% flash.each do |type, message| %>
           <%= content_tag :p, class: "#{type} message" do
             concat link_to '<i class="fa fa-times-circle" aria-hidden="true"></i>'.html_safe, 'javascript:;', class: 'close'

@@ -25,12 +25,17 @@ $(document).on('turbolinks:load', function () {
 
 
     if ($("#flash").length) {
-        $("#flash").fadeIn(1500);
+        var timeout = $("#flash").data('timeout');
+        if (timeout === undefined) { timeout = 3000 }
+        var fadeout = $("#flash").data('fadeout');
+        if (fadeout === undefined) { fadeout = 1500 }
+
+        $("#flash").fadeIn(fadeout);
         setTimeout(function() {
-            $("#flash").fadeOut(1500);
-        }, 3000);
-        $("#flash").click(function() {
-            $("#flash").hide('fast');
+            $("#flash").fadeOut(fadeout);
+        }, timeout);
+        $("#flash p.message").click(function() {
+            $("#flash").fadeOut(fadeout);
         });
     }
 

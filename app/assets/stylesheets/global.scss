@@ -39,9 +39,10 @@ a {
 
 #flash {
   display: none;
-  cursor: pointer;
   text-align: center;
   z-index: 2000;
+  height: 0;
+  overflow: visible;
 
   p.message {
     position: relative;
@@ -52,6 +53,7 @@ a {
     border: 1px solid transparent;
     border-radius: 6px;
     color: #4d394b;
+    cursor: pointer;
 
     a.close {
       display: block;

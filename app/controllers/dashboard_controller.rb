@@ -9,5 +9,7 @@ class DashboardController < ApplicationController
     skip_policy_scope
   end
 
-  def super_admin; end
+  def super_admin
+    skip_policy_scope
+  end
 end

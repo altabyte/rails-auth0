@@ -1,4 +1,5 @@
 require 'auth0'
+require 'rollbar'
 
 module Auth0
   module ManagementAPI
@@ -13,6 +14,9 @@ module Auth0
       #
       def self.get
         request_management_access_token!
+      rescue Auth0::Exception, OpenSSL::SSL::SSLError, Net::ReadTimeout => e
+        Rollbar.error(e)
+        raise e
       end
 
       def self.decode_token(token:)
@@ -70,10 +74,10 @@ module Auth0
         }
       end
 
-      def self.net_http(uri:)
+      def self.net_http(uri:, verify_mode: OpenSSL::SSL::VERIFY_PEER)
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.verify_mode = verify_mode
         http
       end
 

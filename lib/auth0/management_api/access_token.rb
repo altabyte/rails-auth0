@@ -19,8 +19,16 @@ module Auth0
         raise e
       end
 
-      def self.decode_token(token:)
-        JWT.decode token, nil, false
+      def self.decode_token(token:, verify: true)
+        JWT.decode(token, nil,
+                   verify,
+                   algorithm: 'RS256',
+                   iss: "https://#{auth0_domain}/",
+                   verify_iss: true,
+                   aud: "https://#{auth0_domain}/api/v2/",
+                   verify_aud: true) do |header|
+          jwk_hash[header['kid']]
+        end
       end
 
       # Determine if the given JWT auth token has expired.
@@ -106,6 +114,25 @@ module Auth0
         raise Auth0::Exception, "#{response.code}: Auth0 management token request failed" if response.code.to_i >= 300
       end
 
+      # Get the 'well-known' JSON Web Key Set (JWK) hosting the public key for this client.
+      # To find the JWK URL in the Auth0 dashboard, scroll to the bottom of the Client page, expand the
+      # `Show Advanced Settings` link then open the `Endpoints` tab.
+      # @return [Hash]
+      def self.jwk_hash
+        jwks_raw = Net::HTTP.get auth0_uri(path: '/.well-known/jwks.json')
+        jwks_keys = Array(JSON.parse(jwks_raw)['keys'])
+        Hash[
+          jwks_keys .map do |k|
+            [
+              k['kid'],
+              OpenSSL::X509::Certificate.new(
+                Base64.decode64(k['x5c'].first)
+              ).public_key
+            ]
+          end
+        ]
+      end
+
       #---------------------------------------------------------------------------
       # Make the following methods private
       #
@@ -113,6 +140,7 @@ module Auth0
                            :auth0_client_id,
                            :auth0_client_secret,
                            :auth0_uri,
+                           :jwk_hash,
                            :management_api_credentials,
                            :net_http,
                            :request_management_access_token!,

@@ -45,26 +45,27 @@ module Auth0
       # private methods
 
       def self.auth0_domain
-        ENV['AUTH0_DOMAIN']
+        ENV.fetch('AUTH0_DOMAIN', nil)
       end
 
       def self.auth0_client_id
-        ENV['AUTH0_CLIENT_ID']
+        ENV.fetch('AUTH0_MANAGEMENT_API_CLIENT_ID', ENV.fetch('AUTH0_CLIENT_ID', nil))
       end
 
-      def self.auth0_secret
-        ENV['AUTH0_CLIENT_SECRET']
+      def self.auth0_client_secret
+        ENV.fetch('AUTH0_MANAGEMENT_API_CLIENT_SECRET', ENV.fetch('AUTH0_CLIENT_SECRET', nil))
       end
 
-      def self.auth0_uri(path:)
-        URI("https://#{auth0_domain}#{path}")
+      def self.auth0_uri(path: '')
+        path = path[1..-1] if path.to_s[0] == '/'
+        URI("https://#{auth0_domain}/#{path}")
       end
 
       def self.management_api_credentials
         {
           grant_type:     'client_credentials',
           client_id:      auth0_client_id,
-          client_secret:  auth0_secret,
+          client_secret:  auth0_client_secret,
           audience:       "https://#{auth0_domain}/api/v2/"
         }
       end
@@ -106,7 +107,7 @@ module Auth0
       #
       private_class_method :auth0_domain,
                            :auth0_client_id,
-                           :auth0_secret,
+                           :auth0_client_secret,
                            :auth0_uri,
                            :management_api_credentials,
                            :net_http,

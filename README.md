@@ -116,6 +116,11 @@ if you prefer not to put them in [config/database.yml](config/database.yml).
 **Note**: `DATABASE_HOST` is generally always its default value of `localhost`,
 but must be set to `postgres` for GitLab CI.
 
+### AUTH0_CALLBACK_URL
+
+The callback URL to be called after a user has logged in or signed up. For development use
+`'http://localhost:3000/auth/auth0/callback'`
+
 ### AUTH0_DOMAIN
 
 Auth0 client application domain. You can find this in the [clients](https://manage.auth0.com/#/clients) 
@@ -127,15 +132,20 @@ The ID of your Auth0 client.
 
 ### AUTH0_CLIENT_SECRET
 
-The Auth0 client application secret - A.K.A. password.
+The Auth0 client application secret. This is essentially the password to this Auth0 client and must be securely stored.
+
+### AUTH0_MANAGEMENT_API_CLIENT_ID
+
+The ID for your Auth0 Management API client. It is recommended that you create an Auth0 client
+specifically for the management API, rather than reusing an existing client.
+
+### AUTH0_MANAGEMENT_API_CLIENT_SECRET
+
+The client secret for your Auth0 management API.
 
 **Note:** It is good practice to [Rotate](https://auth0.com/docs/api/management/v2#!/Clients/post_rotate_secret)
 your client secret frequently.
 
-### AUTH0_CALLBACK_URL
-
-The callback URL to be called after a user has logged in or signed up. For development use
-`'http://localhost:3000/auth/auth0/callback'`
 
 ## Testing
 

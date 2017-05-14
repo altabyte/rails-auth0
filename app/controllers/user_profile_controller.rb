@@ -1,4 +1,4 @@
-require 'auth0/api_management_access_token'
+require 'auth0/management_api/access_token'
 
 # Allow users to update their Auth0 user profiles.
 #

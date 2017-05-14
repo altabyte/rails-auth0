@@ -1,27 +1,25 @@
 require 'rails_helper'
 require 'auth0'
-require 'auth0/api_management_access_token'
+require 'auth0/management_api/access_token'
 
-describe 'Auth0::API::ManagementAccessToken' do
+describe 'Auth0::ManagementAPI::AccessToken' do
 
   context 'Invalid credentials' do
     it 'Fails when AUTH0_DOMAIN is invalid' do
       ClimateControl.modify AUTH0_DOMAIN: 'INVALID' do
-        # Probably not necessary to test this.
-        # expect { Auth0::API::ManagementAccessToken.get }.to raise_error(SocketError)
+        # Probably not necessary to test this, as it may be hitting someone else's API.
+        # expect { Auth0::ManagementAPI::AccessToken.get }.to raise_error(SocketError)
       end
     end
 
-    it 'Fails when AUTH0_CLIENT_ID is invalid' do
-      ClimateControl.modify AUTH0_CLIENT_ID: 'INVALID' do
-        expect { Auth0::API::ManagementAccessToken.get }.to raise_error(Auth0::Exception)
-      end
+    it 'Fails when Auth0 Client ID is invalid' do
+      allow(Auth0::ManagementAPI::AccessToken).to receive(:auth0_client_id).and_return('INVALID')
+      expect { Auth0::ManagementAPI::AccessToken.get }.to raise_error(Auth0::Exception)
     end
 
-    it 'Fails when AUTH0_CLIENT_SECRET is invalid' do
-      ClimateControl.modify AUTH0_CLIENT_SECRET: 'INVALID' do
-        expect { Auth0::API::ManagementAccessToken.get }.to raise_error(Auth0::Exception)
-      end
+    it 'Fails when Auth0 Client Secret is invalid' do
+      allow(Auth0::ManagementAPI::AccessToken).to receive(:auth0_client_secret).and_return('INVALID')
+      expect { Auth0::ManagementAPI::AccessToken.get }.to raise_error(Auth0::Exception)
     end
   end
 
@@ -42,35 +40,35 @@ describe 'Auth0::API::ManagementAccessToken' do
 
     it 'does not respond to private methods' do
       private_methods.each do |private_method|
-        expect(Auth0::API::ManagementAccessToken).not_to respond_to private_method
+        expect(Auth0::ManagementAPI::AccessToken).not_to respond_to private_method
       end
     end
   end
 
   describe '#get' do
-    it { expect(Auth0::API::ManagementAccessToken).to respond_to :get }
-    it { expect { Auth0::API::ManagementAccessToken.get }.not_to raise_error }
+    it { expect(Auth0::ManagementAPI::AccessToken).to respond_to :get }
+    it { expect { Auth0::ManagementAPI::AccessToken.get }.not_to raise_error }
 
     describe 'token' do
       before(:all) do
-        @token = Auth0::API::ManagementAccessToken.get
+        @token = Auth0::ManagementAPI::AccessToken.get
         puts @token
       end
       let(:token) { @token }
 
       it { expect(token).to be_a String }
       it { expect(token.split('.').count).to eq 3 }
-      it { puts Auth0::API::ManagementAccessToken.decode_token(token: token) }
-      it { puts "Expires: #{Time.at Auth0::API::ManagementAccessToken.decode_token(token: token).first.fetch('exp', 0)}" }
-      it { expect(Auth0::API::ManagementAccessToken.jwt_expired?(token: token)).to be false }
-      it { expect(Auth0::API::ManagementAccessToken.jwt_scopes(token: token)).to be_a Array }
-      it { puts Auth0::API::ManagementAccessToken.jwt_scopes(token: token).join("\n") }
+      it { puts Auth0::ManagementAPI::AccessToken.decode_token(token: token) }
+      it { puts "Expires: #{Time.at Auth0::ManagementAPI::AccessToken.decode_token(token: token).first.fetch('exp', 0)}" }
+      it { expect(Auth0::ManagementAPI::AccessToken.jwt_expired?(token: token)).to be false }
+      it { expect(Auth0::ManagementAPI::AccessToken.jwt_scopes(token: token)).to be_a Array }
+      it { puts Auth0::ManagementAPI::AccessToken.jwt_scopes(token: token).join("\n") }
     end
   end
 
   describe 'API calls using access token' do
     before(:all) do
-      @token = Auth0::API::ManagementAccessToken.get
+      @token = Auth0::ManagementAPI::AccessToken.get
       @auth0 = Auth0Client.new(client_id: ENV.fetch('AUTH0_CLIENT_ID', ''),
                                token: @token,
                                domain: ENV.fetch('AUTH0_DOMAIN', ''),

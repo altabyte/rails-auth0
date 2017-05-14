@@ -10,7 +10,7 @@ end
 # Must be before other gems that rely on environmental variables!
 gem 'dotenv-rails', groups: %i[development test]
 
-gem 'rails',                                            '~> 5.1.0'
+gem 'rails',                                            '~> 5.1.1'
 gem 'puma',                                             '~> 3.8'
 gem 'pg', '~> 0.20',                                    platform: :ruby
 gem 'activerecord-jdbcpostgresql-adapter',              platform: :jruby

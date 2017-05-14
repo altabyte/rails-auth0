@@ -1,9 +1,9 @@
 require 'auth0'
 
 module Auth0
-  module API
+  module ManagementAPI
     # Get an API access token for the Auth0 API.
-    module ManagementAccessToken
+    module AccessToken
 
       # Get a JWT access token for the management API.
       #

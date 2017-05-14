@@ -3,7 +3,7 @@
 class Auth0Controller < ApplicationController
   include Auth0Helper
 
-  before_action :set_session_userinfo, only: :callback
+  before_action :set_session, only: :callback
 
   layout 'public'
 
@@ -12,7 +12,7 @@ class Auth0Controller < ApplicationController
   # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
   # Refer to https://github.com/auth0/omniauth-auth0#auth-hash for complete information on 'omniauth.auth' contents.
   def callback
-    redirect_to dashboard_path, notice: "Logged in as #{session[:userinfo][:info][:email]}"
+    redirect_to dashboard_path
   end
 
   # If user authentication fails on the provider side OmniAuth will redirect to /auth/failure,
@@ -39,8 +39,10 @@ class Auth0Controller < ApplicationController
   #---------------------------------------------------------------------------
   private
 
-  def set_session_userinfo
-    session[:userinfo] = request.env['omniauth.auth']
+  def set_session
     puts request.env['omniauth.auth'].to_yaml if Rails.env.development? || Rails.env.test?
+    session[:id_token]   = request.env['omniauth.auth'].credentials.id_token
+    session[:expires_at] = request.env['omniauth.auth'].credentials.expires_at
+    session[:auth0_json] = request.env['omniauth.auth'].to_json
   end
 end

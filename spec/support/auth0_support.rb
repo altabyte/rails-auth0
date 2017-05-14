@@ -3,7 +3,10 @@ module Auth0RequestSpecHelper
   # Stub the value of `session[:userinfo]` with Auth0 user credentials.
   #
   def assign_session_for_auth0(user: create_user, params: {})
-    session[:userinfo] = omniauth_auth(user: user, params: params)
+    auth_hash = omniauth_auth(user: user, params: params)
+    session[:auth0_json] = auth_hash.to_json
+    session[:id_token]   = auth_hash.credentials.id_token
+    session[:expires_at] = auth_hash.credentials.expires_at
   end
 
   # Set the value of `request.env['omniauth.auth']` for use in the Auth0 callback method after registration or login.
@@ -61,7 +64,9 @@ module Auth0RequestSpecHelper
   def assign_omniauth_auth_extra(omniauth_auth:, user:, params:)
     omniauth_auth.extra = {
       raw: {
-        email: user.email
+        email: user.email,
+        email_verified: params.fetch(:email_verified, true),
+        picture: params.fetch(:avatar, nil)
       }
     }
   end

@@ -19,11 +19,10 @@ class UserProfileController < ApplicationController
   end
 
   def update
-    changes = []
     info = auth0_api.patch_user(current_user.auth0_id, user_params)
-    changes << :email unless current_user.email == info.fetch('email', nil)
-    changes << :name  unless current_user.name  == info.fetch('user_metadata', {}).fetch('name', nil)
-    session.delete(:userinfo) if changes.any?
+    session_auth0 = JSON.parse(session[:auth0_json] || '{}').with_indifferent_access
+    session_auth0[:extra][:raw_info] = info if session_auth0.fetch(:extra, {}).fetch(:raw_info, false)
+    session[:auth0_json] = session_auth0.to_json
     redirect_to dashboard_path, notice: 'User profile updated'
   end
 
@@ -32,7 +31,7 @@ class UserProfileController < ApplicationController
 
   def auth0_api
     return @auth0_api if @auth0_api
-    access_token = Auth0::API::ManagementAccessToken.get
+    access_token = Auth0::ManagementAPI::AccessToken.get
     @auth0_api ||= Auth0Client.new(client_id: ENV.fetch('AUTH0_CLIENT_ID', ''),
                                    token: access_token,
                                    domain: ENV.fetch('AUTH0_DOMAIN', ''),

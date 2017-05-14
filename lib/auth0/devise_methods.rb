@@ -19,7 +19,7 @@ module Auth0
     #
     def authenticate_user!
       if user_signed_in?
-        @current_user = auth0_user
+        @current_user = user_from_session
       else
         session.delete(:userinfo)
         redirect_to(login_path, alert: 'Please log in to access')
@@ -43,7 +43,7 @@ module Auth0
     # @return [String] the user ID token.
     #
     def auth0_id_token
-      session.fetch('userinfo', {}).fetch('credentials', {}).fetch('id_token', nil)
+      session.fetch(:id_token, nil)
     end
 
     # Get the hash of claims made in the Auth0 JWT.
@@ -65,7 +65,8 @@ module Auth0
     #-------------------------------------------------------------------------
     private
 
-    def auth0_user
+    # Create a new Auth0User by extracting details from the JWT.
+    def user_from_claims
       user                = Auth0User.new
       user.sub            = auth0_claims[:sub]
       user.email          = auth0_claims[:email]
@@ -77,6 +78,19 @@ module Auth0
       user.iat            = auth0_claims[:iat]
       user.iss            = auth0_claims[:iss]
       user.aud            = auth0_claims[:aud]
+      user
+    end
+
+    # Extend user_from_claims by merging data from session[:auth0_json].
+    # This accommodates the situation where the user has updated their profile
+    # without refreshing their session id_token.
+    def user_from_session
+      user = user_from_claims
+      return user unless session[:auth0_json]
+      raw = JSON.parse(session[:auth0_json] || '{}').with_indifferent_access.fetch(:extra, {}).fetch(:raw_info, {})
+      user.email         = raw.fetch(:email, user.email)
+      user.picture       = raw.fetch(:picture, user.picture)
+      user.user_metadata = raw.fetch(:user_metadata, user.user_metadata)
       user
     end
 

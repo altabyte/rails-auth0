@@ -2,7 +2,8 @@
 
 This is a bare-bones Rails 5.1 [PostgreSQL](https://www.postgresql.org/) application with authentication
 handled by [Auth0](https://auth0.com/) and authorization by [Pundit](https://github.com/elabs/pundit).
-I generally clone this repo when starting a new web application.
+I generally clone this repo when starting a new web application. 
+The staging app can be found [hosted here](https://rails-5-auth0-staging.herokuapp.com/) on Heroku.
 
 This application uses [Redis](https://redis.io/) for the [session store](config/initializers/session_store.rb).
 My preferred redis hosting is [Redis Cloud](https://redislabs.com/), which is available as a

@@ -5,7 +5,12 @@ stages:
   - deploy
 
 variables:
+  # App name is used as a prefix for things like Redis keys and S3 buckets.
+  # It should not have any spaces.
   APP_NAME:             'Rails-Auth0'
+
+  # Use the same version of Bundler as Heroku.
+  # https://devcenter.heroku.com/articles/ruby-support#libraries
   BUNDLER_VERSION:      '1.13.7'
 
   POSTGRES_DB:          'rails_auth0'
@@ -83,9 +88,12 @@ rspec:
 # Deployment
 #
 # https://docs.gitlab.com/ce/ci/yaml/#special-yaml-features
+#
+# Note: Automatic release migrations are triggered in the Procfile.
+#
 .install_dpl: &dpl # Hidden key that defines an anchor named 'dpl'
   before_script:
-    - gem install dpl -v '1.8.31' --no-ri --no-rdoc
+    - gem install dpl -v '1.8.32' --no-ri --no-rdoc
 
 staging:
   <<: *dpl

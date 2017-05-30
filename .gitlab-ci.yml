@@ -28,45 +28,50 @@ variables:
   DISPLAY:              ':99'
   SPEC_RETRIES:         '3'
 
-before_script:
-  - apt-get update -qy
-  - apt-get install -y nodejs # wkhtmltopdf xvfb
-  - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
-  - apt-get install -y redis-server
-
-  - uname -a
-  - ruby -v
-  - which ruby
-  - which pg_dump
-  - pg_dump --version
-  - export
-
-  # https://devcenter.heroku.com/articles/ruby-support#libraries
-  # Bundler version used by Heroku is 1.13.7
-  - gem install bundler --no-ri --no-rdoc -v $BUNDLER_VERSION
-  - bundle install --deployment --jobs $(nproc) --path vendor/bundle
-
 rubocop:
   stage: test
+  before_script:
+    - gem install rubocop --no-ri --no-rdoc
   script:
-    - bundle exec rubocop
+    - rubocop
   allow_failure: true
 
 audit_gems:
   stage: test
+  before_script:
+    - gem install bundler-audit --no-ri --no-rdoc
   script:
-    - bundle exec bundle-audit update
-    - bundle exec bundle-audit -v
+    - bundle-audit update
+    - bundle-audit -v
   allow_failure: false
 
 brakeman:
   stage: test
+  before_script:
+    - gem install brakeman --no-ri --no-rdoc
   script:
-    - bundle exec brakeman --no-progress
+    - brakeman --no-progress
   allow_failure: false
 
 rspec:
   stage: test
+
+  before_script:
+    - apt-get update -qy
+    - apt-get install -y nodejs # wkhtmltopdf xvfb
+    - apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
+    - apt-get install -y redis-server
+
+    - uname -a
+    - ruby -v
+    - which ruby
+    - which pg_dump
+    - pg_dump --version
+    - export
+    # - redis-cli ping  # Check server is up. Should reply with 'PONG'
+
+    # Install application gems.
+    - bundle install --deployment --jobs $(nproc) --path vendor/bundle
 
   cache:
     key: 'bundle'

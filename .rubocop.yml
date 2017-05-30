@@ -26,6 +26,26 @@ Documentation:
     - spec/**
     - spec/**/**
 
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+
+# Allow more than one blank line
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+# Allow { :this } and [ :this ]
+Layout/SpaceInsideBrackets:
+  Enabled: false
+
 MethodLength:
   Max: 15
 
@@ -57,25 +77,5 @@ Security/MarshalLoad:
 Style/BlockComments:
   Enabled: false
 
-Style/ExtraSpacing:
-  AllowForAlignment: true
-
-# Allow more than one blank line
-Style/EmptyLines:
-  Enabled: false
-
-Style/EmptyLinesAroundBlockBody:
-  Enabled: false
-
-Style/EmptyLinesAroundModuleBody:
-  EnforcedStyle: empty_lines_except_namespace
-
-Style/ExtraSpacing:
-  Enabled: false
-
 Style/FrozenStringLiteralComment:
-  Enabled: false
-
-# Allow { :this } and [ :this ]
-Style/SpaceInsideBrackets:
   Enabled: false

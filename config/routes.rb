@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # TODO: routing-filter gem does not currently support Rails 5.1
   # filter :locale, exclude: %r{\A/auth/auth0/callback|/auth/failure}
 
+  match '/auth/set-state', via: :post, to: 'auth0#set_state'
   match '/auth/auth0/callback', via: :get, to: 'auth0#callback'
   match '/auth/failure', via: :get, to: 'auth0#failure'
   match '/user/profile', via: :get, to: 'user_profile#edit'

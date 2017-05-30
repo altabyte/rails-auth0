@@ -147,6 +147,21 @@ The client secret for your Auth0 management API.
 **Note:** It is good practice to [Rotate](https://auth0.com/docs/api/management/v2#!/Clients/post_rotate_secret)
 your client secret frequently.
 
+### PROVIDER_IGNORES_STATE
+
+Auth0 Lock widget uses a `state` variable in the session to prevent CSRF attacks.
+Setting this value to `true` in [config/initializers/auth0.rb](config/initializers/auth0.rb) 
+will ignore the state and by-pass this security feature. Setting this to `true` in the test environment
+can simplify automated integration testing.
+
+Alternatively, you can assign the state session variable with the following POST command
+before integration tests.
+
+```ruby
+post auth_set_state_path, params: { state: SecureRandom.hex(24) }
+```
+
+See [Auth0Controller](app/controllers/auth0_controller.rb) for implementation.
 
 ## Testing
 

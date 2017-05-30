@@ -7,6 +7,17 @@ class Auth0Controller < ApplicationController
 
   layout 'public'
 
+  # Helper method for RSpec tests to assign the session `state` variable used to prevent CSRF attacks.
+  #
+  #   `post auth_set_state_path, params: { state: SecureRandom.hex(24) }`
+  #
+  # Alternatively can set `provider_ignores_state: true` in config/initializers/auth0.rb
+  # or set PROVIDER_IGNORES_STATE environmental variable to true.
+  #
+  def set_state
+    session['omniauth.state'] = params[:state] if params.key?(:state) && Rails.env.test?
+  end
+
   # OmniAuth places the User Profile information (retrieved by omniauth-auth0) in request.env['omniauth.auth'].
   # In this tutorial, you will store that info in the session, under 'userinfo'.
   # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].

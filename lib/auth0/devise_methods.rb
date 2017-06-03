@@ -65,9 +65,9 @@ module Auth0
     #-------------------------------------------------------------------------
     private
 
-    # Create a new Auth0User by extracting details from the JWT.
+    # Create a new Auth0 user struct by extracting details from the JWT.
     def user_from_claims
-      user                = Auth0User.new
+      user                = Auth0::UserStruct.new
       user.sub            = auth0_claims[:sub]
       user.email          = auth0_claims[:email]
       user.email_verified = auth0_claims[:email_verified]

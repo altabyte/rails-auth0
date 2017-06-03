@@ -6,8 +6,8 @@ class AccountPolicy < ApplicationPolicy
   attr_reader :user, :account
 
   # Construct this policy.
-  # @param [Auth0User] user the current_user
-  # @param [Account] account the account instance or class.
+  # @param user [Auth0User] the current_user
+  # @param account [Account] the account instance or class.
   #
   def initialize(user, account)
     @user = user

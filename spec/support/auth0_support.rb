@@ -17,7 +17,7 @@ module Auth0RequestSpecHelper
   end
 
   def create_user(params = {})
-    user = Auth0User.new
+    user = Auth0::UserStruct.new
     user.sub            = params.fetch(:auth0_id,       "auth0|#{SecureRandom.hex(24)}")
     user.email          = params.fetch(:email,          Faker::Internet.email)
     user.email_verified = params.fetch(:email_verified, true)
